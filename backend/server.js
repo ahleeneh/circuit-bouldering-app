@@ -45,7 +45,7 @@ app.use(session({
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./passportConfig')(passport);
+require('./passport')(passport);
 
 
 // routes
@@ -73,14 +73,14 @@ app.post('/register', async (req, res) => {
     console.log(req.body);
 
     try {
-        const existingUser = await User.findOne({ username: req.body.username });
+        const existingUser = await User.findOne({username: req.body.username});
         if (existingUser) {
             res.send('User Already Exists');
         } else {
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             const newUser = new User({
                 username: req.body.username,
-                password:hashedPassword
+                password: hashedPassword
             });
             await newUser.save();
             res.send('User Created!');
@@ -100,6 +100,19 @@ app.get('/user', (req, res) => {
     // and contains all the session data
     // this can be used and called at absolutely any time, anywhere in the application
 })
+
+app.post('/logout', function (req, res, next) {
+    console.log('about to log out user')
+
+    req.logout(function (err) {
+        if (err) {
+            console.error('Error during logout: ', err);
+            return next(err);
+        }
+        console.log('user has been logged out: ', req.isAuthenticated());
+        res.send('Logged out successfully!');
+    });
+});
 
 
 app.listen(process.env.PORT, () => {
