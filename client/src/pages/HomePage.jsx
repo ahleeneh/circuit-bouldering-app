@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import {useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 // import {Link} from 'react-router-dom';
 // import {useNavigate} from 'react-router';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 
 function HomePage() {
+
+    
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerUsername, setRegisterUsername] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
@@ -32,7 +34,7 @@ function HomePage() {
         }
     }
 
-    const login = async() => {
+    const login = async () => {
         try {
             const response = await axios.post('http://localhost:8000/login', {
                 username: loginUsername,
@@ -78,7 +80,7 @@ function HomePage() {
                 <input placeholder="email" onChange={e => setRegisterEmail(e.target.value)}/>
                 <input placeholder="username" onChange={e => setRegisterUsername(e.target.value)}/>
                 <input placeholder="password" onChange={e => setRegisterPassword(e.target.value)}/>
-                <button onClick={register}>Submit</button>
+                <button className="button button-register-home" onClick={register}>Submit</button>
             </div>
 
 
@@ -86,7 +88,7 @@ function HomePage() {
                 <h1>Login</h1>
                 <input placeholder="username" onChange={e => setLoginUsername(e.target.value)}/>
                 <input placeholder="password" onChange={e => setLoginPassword(e.target.value)}/>
-                <button onClick={login}>Submit</button>
+                <button className="button button-login" onClick={login}>Submit</button>
             </div>
 
             <div>
