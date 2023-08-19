@@ -11,6 +11,9 @@
     --color-blue: #27a5b6;
     --color-blue-hover: #06afc5;
 
+    --color-purple: #703d9f;
+    --color-purple-hover: #8d5eb9;
+
     --border-radius-1: 0.3rem;
     --border-radius-2: 0.1rem;
 }
@@ -66,7 +69,7 @@
     justify-content: space-between;
     padding: 2rem 4rem;
     box-sizing: border-box;
-    min-height: calc(100vh - 131.81px - 114px)
+    min-height: calc(100vh - 143.56px - 114px)
 }
 
 .footer {
@@ -84,17 +87,21 @@
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 1.4rem;
 }
 
 .nav-links li {
     font-size: 1.2rem;
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--color-dark-grey);
     transition: all 300ms ease;
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a:hover {
@@ -168,6 +175,20 @@
 .button-register-home:hover {
     background: var(--color-medium-grey);
 }
+
+.button-logout {
+    background-color: var(--color-dark-grey);
+    color: var(--color-white);
+    font-weight: normal;
+    max-width:6rem;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.4rem;
+}
+
+.button-logout:hover {
+    background-color: var(--color-medium-grey);
+}
+
 
 /*
   FORMS

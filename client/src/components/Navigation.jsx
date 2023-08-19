@@ -1,7 +1,26 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import {useNavigate} from 'react-router';
+import axios from "axios";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Navigation() {
+    const navigate = useNavigate();
+
+    const logout = async () => {
+        try {
+            const response = await axios.post('http://localhost:8000/logout', null, {
+                withCredentials: true
+            });
+            console.log(response);
+            toast.info('Goodbye!');
+            navigate('/');
+        } catch (error) {
+            console.error('An error occurred: ', error);
+        }
+    }
+
 
     return (
         <nav className="navigation">
@@ -12,7 +31,10 @@ function Navigation() {
                     <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/dashboard">Dashboard</NavLink>
+                    <NavLink to="/dashboard">Sessions</NavLink>
+                </li>
+                <li>
+                    <button className="button button-logout" onClick={logout}>Logout</button>
                 </li>
             </ul>
 

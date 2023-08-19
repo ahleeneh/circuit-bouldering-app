@@ -19,7 +19,7 @@ function RegisterPage() {
             navigate('/');
         } catch (error) {
             console.error('Registration failed: ', error);
-            toast.warning('Registration failed. The provided email or username is already in use.');
+            toast.error('Registration failed. The provided email or username is already in use.');
         }
     }
 

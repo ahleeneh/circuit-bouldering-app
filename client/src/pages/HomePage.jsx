@@ -24,7 +24,7 @@ function HomePage() {
             navigate('/dashboard');
         } catch (error) {
             handleError(error)
-            toast.warning('Sorry, the provided username or password is incorrect.');
+            toast.error('Sorry, the provided username or password is incorrect.');
         }
     }
 
@@ -53,7 +53,7 @@ function HomePage() {
     return (
         <div className="page">
             <h2>Circuit Bouldering App</h2>
-            <p>lorem ipsum</p>
+            <p>Please login below.</p>
 
             <form className="form" onSubmit={handleSubmit(login)}>
                 <label htmlFor="username">Username:
@@ -83,18 +83,15 @@ function HomePage() {
                 </Link>
             </form>
 
+            <br/>
 
-            <h2>Get User<br/>
+            <h2>Check Authentication<br/>
                 <button className="button" onClick={getUser}>Submit</button>
             </h2>
 
-
-
-            <h2>Log Out<br/>
-                <button className="button" onClick={logout}>Submit</button>
-            </h2>
-
-
+            {/*<h2>Log Out<br/>*/}
+            {/*    <button className="button" onClick={logout}>Submit</button>*/}
+            {/*</h2>*/}
 
         </div>
     )

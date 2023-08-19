@@ -21,13 +21,31 @@ function UserDashboardPage() {
         }
     }
 
+    const getUser = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/user', {
+                withCredentials: true
+            });
+            console.log(response);
+        } catch (error) {
+            console.error('An error occurred: ', error);
+        }
+    }
+
     useEffect(() => {
         getUserDashboard();
     }, [])
 
     return (
         authenticated ? (
-            <h1>User Dashboard</h1>
+            <>
+                <h1>User Dashboard</h1>
+
+                <h2>Check Authentication<br/>
+                    <button className="button" onClick={getUser}>Submit</button>
+                </h2>
+            </>
+
         ) : null
     );
 
