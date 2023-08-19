@@ -11,9 +11,9 @@ function Navigation() {
                 <li>
                     <NavLink to="/">Home</NavLink>
                 </li>
-                {/*<li>*/}
-                {/*    <NavLink to="/session">Sessions</NavLink>*/}
-                {/*</li>*/}
+                <li>
+                    <NavLink to="/register">Register</NavLink>
+                </li>
             </ul>
 
         </nav>
