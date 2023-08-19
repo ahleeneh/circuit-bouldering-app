@@ -53,34 +53,25 @@ app.get('/', (req, res) => {
     res.json('hello');
 })
 
-app.post('/login', (req, res, next) => {
-    console.log(req.body);
-
-    passport.authenticate("local", (err, user, info) => {
-        if (err) throw err;
-        if (!user) res.send("No User Exists");
-        else {
-            req.logIn(user, err => {
-                if (err) throw err;
-                res.send('Successfully Authenticated!!!');
-                console.log(req.user);
-            })
-        }
-    })(req, res, next);
-})
+app.post('/login',
+    passport.authenticate("local"), (req, res) => {
+    console.log('User authenticated:', req.user);
+    res.send('Successfully logged in!');
+});
 
 app.post('/register', async (req, res) => {
     console.log(req.body);
+    const { email, username, password } = req.body;
 
     try {
-        const existingUser = await User.findOne({username: req.body.username});
+        const existingUser = await User.findOne({ $or: [{ email: email }, { username: username }] });
         if (existingUser) {
-            res.send('User Already Exists');
+            res.status(400).send('Registration Failed - email or username taken.');
         } else {
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const hashedPassword = await bcrypt.hash(password, 10);
             const newUser = new User({
-                email: req.body.email,
-                username: req.body.username,
+                email: email,
+                username: username,
                 password: hashedPassword
             });
             await newUser.save();
@@ -113,6 +104,16 @@ app.post('/logout', function (req, res, next) {
         console.log('user has been logged out: ', req.isAuthenticated());
         res.send('Logged out successfully!');
     });
+});
+
+app.get('/dashboard', (req, res) => {
+    console.log('DASHBOARD - req.isAuthenticated: ', req.isAuthenticated());
+
+    if (!req.isAuthenticated()) {
+        return res.status(401).json({ error: 'User is not authenticated.' });
+    } else {
+        return res.json({ message: 'User is authenticated!' });
+    }
 });
 
 

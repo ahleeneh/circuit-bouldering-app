@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import RegisterPage from "./pages/RegisterPage";
+import UserDashboardPage from "./pages/UserDashboardPage";
 
 function App() {
 
@@ -39,8 +40,8 @@ function App() {
                             <div className="content">
                                 <Routes>
                                     <Route path='/' element={<HomePage/>}></Route>
-                                    {/*<Route path='/session' element={<SessionPage/>}></Route>*/}
                                     <Route path='/register' element={<RegisterPage/>}></Route>
+                                    <Route path='/dashboard' element={<UserDashboardPage/>}></Route>
                                 </Routes>
                             </div>
                         </div>

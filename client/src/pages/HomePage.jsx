@@ -9,25 +9,22 @@ import 'react-toastify/dist/ReactToastify.css';
 function HomePage() {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
-    
-    const [loginUsername, setLoginUsername] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
 
     const handleError = error => {
         console.error('An error occurred: ', error);
     };
 
-    const login = async () => {
+    const login = async (data) => {
         try {
-            const response = await axios.post('http://localhost:8000/login', {
-                username: loginUsername,
-                password: loginPassword
-            }, {
+            const response = await axios.post('http://localhost:8000/login', data, {
                 withCredentials: true
             });
             console.log(response);
+            toast.success(`Welcome back, ${data.username}!`);
+            navigate('/dashboard');
         } catch (error) {
             handleError(error)
+            toast.warning('Sorry, the provided username or password is incorrect.');
         }
     }
 
@@ -58,25 +55,46 @@ function HomePage() {
             <h2>Circuit Bouldering App</h2>
             <p>lorem ipsum</p>
 
-            <div>
-                <h1>Login</h1>
-                <input placeholder="username" onChange={e => setLoginUsername(e.target.value)}/>
-                <input placeholder="password" onChange={e => setLoginPassword(e.target.value)}/>
-                <button className="button button-login" onClick={login}>Submit</button>
+            <form className="form" onSubmit={handleSubmit(login)}>
+                <label htmlFor="username">Username:
+                    <input
+                        type="text"
+                        name="username"
+                        {...register("username", {required: 'username is required'})}
+                        autoComplete="username"
+                    />
+                    <p>{errors.username?.message}</p>
+                </label>
+
+                <label htmlFor="password">Password:
+                    <input
+                        type="password"
+                        name="password"
+                        {...register("password", {required: 'password is required'})}
+                        autoComplete="password"
+                    />
+                    <p>{errors.password?.message}</p>
+                </label>
+
+                <button className="button button-login" type="submit">Login</button>
+                <hr/>
                 <Link to="/register">
-                    <button className="button">Register</button>
+                    <button className="button button-register-home">Register</button>
                 </Link>
-            </div>
+            </form>
 
-            <div>
-                <h1>Get User</h1>
-                <button onClick={getUser}>Submit</button>
-            </div>
 
-            <div>
-                <h1>Log Out</h1>
-                <button onClick={logout}>Submit</button>
-            </div>
+            <h2>Get User<br/>
+                <button className="button" onClick={getUser}>Submit</button>
+            </h2>
+
+
+
+            <h2>Log Out<br/>
+                <button className="button" onClick={logout}>Submit</button>
+            </h2>
+
+
 
         </div>
     )
