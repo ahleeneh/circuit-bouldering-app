@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 function App() {
+    const [registerEmail, setRegisterEmail] = useState('');
     const [registerUsername, setRegisterUsername] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [loginUsername, setLoginUsername] = useState('');
@@ -14,6 +15,7 @@ function App() {
     const register = async () => {
         try {
             const response = await axios.post('http://localhost:8000/register', {
+                email: registerEmail,
                 username: registerUsername,
                 password: registerPassword
             }, {
@@ -24,18 +26,6 @@ function App() {
             handleError(error);
         }
     }
-
-    // const register = () => {
-    //     axios({
-    //         method: 'POST',
-    //         data: {
-    //             username: registerUsername,
-    //             password: registerPassword
-    //         },
-    //         withCredentials: true,
-    //         url: 'http://localhost:8000/register',
-    //     }).then(res => console.log(res));
-    // };
 
     const login = async() => {
         try {
@@ -51,18 +41,6 @@ function App() {
         }
     }
 
-    // const login = () => {
-    //     axios({
-    //         method: 'POST',
-    //         data: {
-    //             username: loginUsername,
-    //             password: loginPassword
-    //         },
-    //         withCredentials: true,
-    //         url: 'http://localhost:8000/login',
-    //     }).then(res => console.log(res));
-    // }
-
     const getUser = async () => {
         try {
             const response = await axios.get('http://localhost:8000/user', {
@@ -73,14 +51,6 @@ function App() {
             handleError(error)
         }
     }
-
-    // const getUser = () => {
-    //     axios({
-    //         method: 'GET',
-    //         withCredentials: true,
-    //         url: 'http://localhost:8000/user',
-    //     }).then(res => console.log(res));
-    // };
 
     const logout = async () => {
         try {
@@ -93,23 +63,12 @@ function App() {
         }
     }
 
-    // const logout = () => {
-    //     axios({
-    //         method: 'POST',
-    //         withCredentials: true,
-    //         url: 'http://localhost:8000/logout',
-    //     })
-    //         .then(res => console.log(res))
-    //         .catch(error => {
-    //             console.error('logout failed! :', error);
-    //         });
-    // };
-
     return (
         <div className="App">
 
             <div>
                 <h1>Register</h1>
+                <input placeholder="email" onChange={e => setRegisterEmail(e.target.value)}/>
                 <input placeholder="username" onChange={e => setRegisterUsername(e.target.value)}/>
                 <input placeholder="password" onChange={e => setRegisterPassword(e.target.value)}/>
                 <button onClick={register}>Submit</button>
