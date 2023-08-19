@@ -70,24 +70,6 @@ function RegisterPage() {
 
             </div>
 
-
-            {/*<div>*/}
-            {/*    <h1>Login</h1>*/}
-            {/*    <input placeholder="username" onChange={e => setLoginUsername(e.target.value)}/>*/}
-            {/*    <input placeholder="password" onChange={e => setLoginPassword(e.target.value)}/>*/}
-            {/*    <button className="button button-login" onClick={login}>Submit</button>*/}
-            {/*</div>*/}
-
-            {/*<div>*/}
-            {/*    <h1>Get User</h1>*/}
-            {/*    <button onClick={getUser}>Submit</button>*/}
-            {/*</div>*/}
-
-            {/*<div>*/}
-            {/*    <h1>Log Out</h1>*/}
-            {/*    <button onClick={logout}>Submit</button>*/}
-            {/*</div>*/}
-
         </div>
     )
 }
