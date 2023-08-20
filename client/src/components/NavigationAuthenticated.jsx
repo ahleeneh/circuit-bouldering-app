@@ -9,7 +9,7 @@ function NavigationAuthenticated() {
 
     const logout = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/logout', null, {
+            const response = await axios.post('http://localhost:8000/auth/logout', null, {
                 withCredentials: true
             });
             console.log(response);

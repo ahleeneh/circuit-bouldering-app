@@ -16,7 +16,7 @@ function HomePage() {
 
     const login = async (data) => {
         try {
-            const response = await axios.post('http://localhost:8000/login', data, {
+            const response = await axios.post('http://localhost:8000/auth/login', data, {
                 withCredentials: true
             });
             console.log(response);
@@ -34,7 +34,7 @@ function HomePage() {
 
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/check-auth', {
+            const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
             console.log(response);

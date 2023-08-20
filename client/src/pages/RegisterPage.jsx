@@ -11,7 +11,7 @@ function RegisterPage() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:8000/register', data, {
+            const response = await axios.post('http://localhost:8000/auth/register', data, {
                 withCredentials: true
             });
             console.log(response);

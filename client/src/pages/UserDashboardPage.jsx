@@ -10,7 +10,7 @@ function UserDashboardPage() {
 
     const getUserDashboard = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/check-auth', {
+            const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
             setAuthenticated(true);
@@ -25,7 +25,7 @@ function UserDashboardPage() {
 
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/check-auth', {
+            const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
             console.log(response);
