@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {useNavigate} from 'react-router';
 import axios from "axios";
 import {toast} from 'react-toastify';
@@ -14,10 +14,15 @@ function Navigation() {
                 withCredentials: true
             });
             console.log(response);
-            toast.info('Goodbye!');
+            toast.info('Goodbye!', {
+                icon: '👋'
+            });
             navigate('/');
         } catch (error) {
             console.error('An error occurred: ', error);
+            toast.info('No one is logged in!', {
+                icon: '😅'
+            });
         }
     }
 
@@ -36,6 +41,7 @@ function Navigation() {
                 <li>
                     <button className="button button-logout" onClick={logout}>Logout</button>
                 </li>
+
             </ul>
 
         </nav>

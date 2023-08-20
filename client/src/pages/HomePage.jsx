@@ -20,22 +20,28 @@ function HomePage() {
                 withCredentials: true
             });
             console.log(response);
-            toast.success(`Welcome back, ${data.username}!`);
+            toast.success(`Welcome back, ${data.username}!`, {
+                icon: '👋'
+            });
             navigate('/dashboard');
         } catch (error) {
             handleError(error)
-            toast.error('Sorry, the provided username or password is incorrect.');
+            toast.error('Sorry, the provided username or password is incorrect.', {
+                icon: '🚫'
+            });
         }
     }
 
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/user', {
+            const response = await axios.get('http://localhost:8000/check-auth', {
                 withCredentials: true
             });
             console.log(response);
+            toast.success('AUTHENTICATEDDDDD');
         } catch (error) {
             handleError(error)
+            toast.error('NOT AUTHENTICATEDDDD')
         }
     }
 
@@ -88,10 +94,6 @@ function HomePage() {
             <h2>Check Authentication<br/>
                 <button className="button" onClick={getUser}>Submit</button>
             </h2>
-
-            {/*<h2>Log Out<br/>*/}
-            {/*    <button className="button" onClick={logout}>Submit</button>*/}
-            {/*</h2>*/}
 
         </div>
     )

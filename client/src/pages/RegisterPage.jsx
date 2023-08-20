@@ -15,11 +15,15 @@ function RegisterPage() {
                 withCredentials: true
             });
             console.log(response);
-            toast.success('Registration successful! You can now log in.');
+            toast.success('Registration successful! You can now log in.', {
+                icon: '🤝'
+            });
             navigate('/');
         } catch (error) {
             console.error('Registration failed: ', error);
-            toast.error('Registration failed. The provided email or username is already in use.');
+            toast.error('Registration failed. The provided email or username is already in use.', {
+                icon: '🚫'
+            });
         }
     }
 

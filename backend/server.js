@@ -83,19 +83,24 @@ app.post('/register', async (req, res) => {
     }
 })
 
-app.get('/user', (req, res) => {
-    console.log(req.user);
-    console.log('req.isAuthenticated: ', req.isAuthenticated());
-    res.send(req.user);
-    // once authenticated, the user is stored in req.user!!!!!
-    // the req object you get from the client now has a user object inside of it
-    // and contains all the session data
-    // this can be used and called at absolutely any time, anywhere in the application
-})
+// app.post('/logout', function (req, res, next) {
+//     console.log('about to log out user')
+//
+//     req.logout(function (err) {
+//         if (err) {
+//             console.error('Error during logout: ', err);
+//             return next(err);
+//         }
+//         console.log('user has been logged out: ', req.isAuthenticated());
+//         res.send('Logged out successfully!');
+//     });
+// });
 
 app.post('/logout', function (req, res, next) {
+    if (!req.isAuthenticated()) {
+        return res.status(401).send('No user is logged in.');
+    }
     console.log('about to log out user')
-
     req.logout(function (err) {
         if (err) {
             console.error('Error during logout: ', err);
@@ -106,8 +111,18 @@ app.post('/logout', function (req, res, next) {
     });
 });
 
-app.get('/dashboard', (req, res) => {
-    console.log('DASHBOARD - req.isAuthenticated: ', req.isAuthenticated());
+// app.get('/dashboard', (req, res) => {
+//     console.log('DASHBOARD - req.isAuthenticated: ', req.isAuthenticated());
+//
+//     if (!req.isAuthenticated()) {
+//         return res.status(401).json({ error: 'User is not authenticated.' });
+//     } else {
+//         return res.json({ message: 'User is authenticated!' });
+//     }
+// });
+
+app.get('/check-auth', (req, res) => {
+    console.log('[CHECK AUTH] req.isAuthenticated:', req.isAuthenticated(), ' / ', req.user);
 
     if (!req.isAuthenticated()) {
         return res.status(401).json({ error: 'User is not authenticated.' });
@@ -116,6 +131,14 @@ app.get('/dashboard', (req, res) => {
     }
 });
 
+app.get('/get-auth', (req, res) => {
+    console.log('[GET AUTH] req.isAuthenticated:', req.isAuthenticated(), ' / ', req.user);
+    res.send(req.user);
+    // once authenticated, the user is stored in req.user!!!!!
+    // the req object you get from the client now has a user object inside of it
+    // and contains all the session data
+    // this can be used and called at absolutely any time, anywhere in the application
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started on http://localhost:${process.env.PORT}!`)

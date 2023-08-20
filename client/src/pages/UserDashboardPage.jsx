@@ -11,24 +11,28 @@ function UserDashboardPage() {
 
     const getUserDashboard = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/dashboard', {
+            const response = await axios.get('http://localhost:8000/check-auth', {
                 withCredentials: true
             });
             setAuthenticated(true);
         } catch (error) {
-            toast.error('Sorry, you must be logged in to have access to this feature.');
+            toast.warning('Sorry, you must be logged in to have access to this feature.', {
+                icon: '⚠️'
+            });
             navigate('/');
         }
     }
 
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/user', {
+            const response = await axios.get('http://localhost:8000/check-auth', {
                 withCredentials: true
             });
             console.log(response);
+            toast.success('AUTHENTICATEDDDDD');
         } catch (error) {
             console.error('An error occurred: ', error);
+            toast.error('NOT AUTHENTICATEDDDD')
         }
     }
 
