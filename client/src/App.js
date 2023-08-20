@@ -5,16 +5,19 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Navigation from './components/Navigation';
+import NavigationWrapper from './components/NavigationWrapper';
+import Footer from './components/Footer';
+
 import HomePage from './pages/HomePage';
 import RegisterPage from "./pages/RegisterPage";
 import UserDashboardPage from "./pages/UserDashboardPage";
+import AboutPage from './pages/AboutPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
 
     return (
         <div className="App">
-
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
@@ -31,34 +34,26 @@ function App() {
             <BrowserRouter>
                 <div className="App-container">
 
-                    <header className="App-header">
-                        <Navigation/>
-                    </header>
+                    <NavigationWrapper/>
 
                     <main>
-                        <div className="App-main">
-                            <div className="content">
-                                <Routes>
-                                    <Route path='/' element={<HomePage/>}></Route>
-                                    <Route path='/register' element={<RegisterPage/>}></Route>
-                                    <Route path='/dashboard' element={<UserDashboardPage/>}></Route>
-                                </Routes>
-                            </div>
-                        </div>
+                        <Routes>
+                            <Route path='/' element={<HomePage/>}></Route>
+                            <Route path='/about' element={<AboutPage/>}></Route>
+                            <Route path='/register' element={<RegisterPage/>}></Route>
+                            <Route path='/dashboard' element={<UserDashboardPage/>}></Route>
+                            <Route path='*' element={<NotFoundPage />}></Route>
+                        </Routes>
                     </main>
 
-                    <div className="App-footer">
-                        <footer className="footer">
-                            <p>&copy; 2023 Aline Murillo</p>
-                        </footer>
-                    </div>
+                    <Footer/>
 
                 </div>
             </BrowserRouter>
 
         </div>
-
     );
 }
 
 export default App;
+

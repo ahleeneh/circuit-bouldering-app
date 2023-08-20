@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
@@ -15,6 +14,7 @@ function UserDashboardPage() {
                 withCredentials: true
             });
             setAuthenticated(true);
+            console.log(response);
         } catch (error) {
             toast.warning('Sorry, you must be logged in to have access to this feature.', {
                 icon: '⚠️'
@@ -29,27 +29,32 @@ function UserDashboardPage() {
                 withCredentials: true
             });
             console.log(response);
-            toast.success('AUTHENTICATEDDDDD');
+            toast.success('Authenticated!');
         } catch (error) {
             console.error('An error occurred: ', error);
-            toast.error('NOT AUTHENTICATEDDDD')
+            toast.error('Not authenticated!')
         }
     }
 
     useEffect(() => {
         getUserDashboard();
+        // eslint-disable-next-line
     }, [])
 
     return (
         authenticated ? (
-            <>
-                <h1>User Dashboard</h1>
+            <div className="App-main">
+                <div className="content">
 
-                <h2>Check Authentication<br/>
-                    <button className="button" onClick={getUser}>Submit</button>
-                </h2>
-            </>
+                    <div className="page">
+                    <h2>User Dashboard</h2>
+                        <p>
+                            <button className="button" onClick={getUser}>Check Authentication</button>
+                        </p>
+                    </div>
 
+                </div>
+            </div>
         ) : null
     );
 

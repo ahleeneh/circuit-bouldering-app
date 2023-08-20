@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 import {useNavigate} from 'react-router';
@@ -38,63 +38,57 @@ function HomePage() {
                 withCredentials: true
             });
             console.log(response);
-            toast.success('AUTHENTICATEDDDDD');
+            toast.success('Authenticated!');
         } catch (error) {
             handleError(error)
-            toast.error('NOT AUTHENTICATEDDDD')
-        }
-    }
-
-    const logout = async () => {
-        try {
-            const response = await axios.post('http://localhost:8000/logout', null, {
-                withCredentials: true
-            });
-            console.log(response);
-        } catch (error) {
-            handleError(error)
+            toast.error('Not authenticated!')
         }
     }
 
     return (
-        <div className="page">
-            <h2>Circuit Bouldering App</h2>
-            <p>Please login below.</p>
 
-            <form className="form" onSubmit={handleSubmit(login)}>
-                <label htmlFor="username">Username:
-                    <input
-                        type="text"
-                        name="username"
-                        {...register("username", {required: 'username is required'})}
-                        autoComplete="username"
-                    />
-                    <p>{errors.username?.message}</p>
-                </label>
+        <div className="App-main">
+            <div className="content">
+                <div className="page">
 
-                <label htmlFor="password">Password:
-                    <input
-                        type="password"
-                        name="password"
-                        {...register("password", {required: 'password is required'})}
-                        autoComplete="password"
-                    />
-                    <p>{errors.password?.message}</p>
-                </label>
+                    <h2>Login</h2>
 
-                <button className="button button-login" type="submit">Login</button>
-                <hr/>
-                <Link to="/register">
-                    <button className="button button-register-home">Register</button>
-                </Link>
-            </form>
+                    <form className="form" onSubmit={handleSubmit(login)}>
+                        <label htmlFor="username">Username:
+                            <input
+                                type="text"
+                                name="username"
+                                {...register("username", {required: 'Username is required.'})}
+                                autoComplete="username"
+                            />
+                            <p>{errors.username?.message}</p>
+                        </label>
 
-            <br/>
+                        <label htmlFor="password">Password:
+                            <input
+                                type="password"
+                                name="password"
+                                {...register("password", {required: 'Password is required.'})}
+                                autoComplete="password"
+                            />
+                            <p>{errors.password?.message}</p>
+                        </label>
 
-            <h2>Check Authentication<br/>
-                <button className="button" onClick={getUser}>Submit</button>
-            </h2>
+                        <button className="button button-login" type="submit">Login</button>
+                        <hr/>
+                        <Link to="/register">
+                            <button className="button button-register-home">Register</button>
+                        </Link>
+                    </form>
 
+                    <br/>
+
+                    <h2>
+                        <button className="button" onClick={getUser}>Check Authentication</button>
+                    </h2>
+
+                </div>
+            </div>
         </div>
     )
 }
