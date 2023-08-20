@@ -1,35 +1,20 @@
-const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
-// const passportLocal = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
-// const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const { sessionConfig } = require('./database');
+
+
+/**
+ * ---------- SETUP ----------
+ */
+
 require('dotenv').config();
 
+// create the Express application
 const app = express();
-// const User = require('./user');
-
-// import route handlers
-const indexRouter = require('./routes/indexRouter');
-const authRouter = require('./routes/authRouter');
-
-
-conn = `${process.env.START_MONGODB_STRING}://${process.env.DBUSER_MONGODB}:${process.env.PASSWORD_MONGODB}${process.env.END_MONGODB_STRING}`
-
-mongoose.connect(conn, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => {
-        console.log('MongoDB connection open!');
-    })
-    .catch(err => {
-        console.log('Bummer! MongoDB connection not working!');
-        console.error(err)
-    });
 
 // middleware setup
 app.use(bodyParser.json());
@@ -39,23 +24,31 @@ app.use(cors({
     credentials: true
 }))
 
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true
-}));
-
+// session setup
+app.use(session(sessionConfig));
 app.use(cookieParser(process.env.SESSION_SECRET));
+
+// passport authentication
 app.use(passport.initialize());
 app.use(passport.session());
 require('./passport')(passport);
 
 
-// routes
+/**
+ * ---------- ROUTES ----------
+ */
+
+// import route handlers
+const indexRouter = require('./routes/indexRouter');
+const authRouter = require('./routes/authRouter');
+
+// mount route handlers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
-// listener
+/**
+ * ---------- SERVER ----------
+ */
 app.listen(process.env.PORT, () => {
     console.log(`Server started on http://localhost:${process.env.PORT}!`)
 })
