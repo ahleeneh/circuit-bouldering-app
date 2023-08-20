@@ -11,6 +11,7 @@ const { sessionConfig } = require('./database');
  * ---------- SETUP ----------
  */
 
+// gives us access to variables set in the .env file via 'process.env.VARIABLE_NAME' system
 require('dotenv').config();
 
 // create the Express application

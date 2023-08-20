@@ -17,7 +17,12 @@ mongoose.connect(conn, {
 const sessionConfig = {
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7 // equals 1 week
+    }
 }
 
 module.exports = { sessionConfig };
