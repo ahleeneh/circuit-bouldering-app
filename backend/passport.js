@@ -31,6 +31,7 @@ module.exports = function (passport) {
         try {
             const user = await User.findById(id);
             const userInformation = {
+                _id: user._id,
                 username: user.username
             };
             done(null, userInformation);
@@ -38,13 +39,5 @@ module.exports = function (passport) {
             done(error, null);
         }
     });
-
-    // passport.deserializeUser(async (id, done) => {
-    //     try {
-    //         const user = await User.findById(id);
-    //         done(null, user);
-    //     } catch (error) {
-    //         done(error, null);
-    //     }
-    // });
+    
 };

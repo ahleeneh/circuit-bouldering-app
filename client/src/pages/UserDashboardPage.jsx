@@ -4,6 +4,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import SessionView from '../components/SessionView';
+import SessionAdd from '../components/SessionAdd';
 
 function UserDashboardPage() {
     const navigate = useNavigate();
@@ -54,6 +55,7 @@ function UserDashboardPage() {
                         </p>
 
                         {/*<SessionView />*/}
+                        <SessionAdd />
                     </div>
 
 

@@ -244,7 +244,7 @@ form {
     color: var(--color-medium-grey);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=date], input[type=number] {
     width: 100%;
     padding: 0.8rem 0.8rem;
     background-color: var(--color-lightest-grey);

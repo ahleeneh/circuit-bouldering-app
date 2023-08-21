@@ -17,7 +17,7 @@ router.get('/is-authenticated', (req, res) => {
 
 // router: GET '/auth/current-user'
 router.get('/current-user', (req, res) => {
-    console.log('[GET AUTH] req.isAuthenticated:', req.isAuthenticated(), ' / ', req.user);
+    console.log('[CURRENT USER] req.isAuthenticated:', req.isAuthenticated(), ' / ', req.user);
     res.send(req.user);
     // once authenticated, the user is stored in req.user!!!!!
     // the req object you get from the client now has a user object inside of it
@@ -44,7 +44,7 @@ router.post('/register', async (req, res) => {
         } else {
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            // create a new user using the User mmodel
+            // create a new user using the User model
             const newUser = new User({
                 email: email,
                 username: username,
