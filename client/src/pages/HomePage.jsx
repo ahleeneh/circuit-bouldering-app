@@ -10,10 +10,6 @@ function HomePage() {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
 
-    const handleError = error => {
-        console.error('An error occurred: ', error);
-    };
-
     const login = async (data) => {
         try {
             const response = await axios.post('http://localhost:8000/auth/login', data, {
@@ -25,7 +21,7 @@ function HomePage() {
             });
             navigate('/dashboard');
         } catch (error) {
-            handleError(error)
+            console.error('An error occurred: ', error);
             toast.error('Sorry, the provided username or password is incorrect.', {
                 icon: '🚫'
             });
@@ -37,11 +33,15 @@ function HomePage() {
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
-            console.log(response);
-            toast.success('Authenticated!');
+
+            if (response.data === true) {
+                toast.success('Authenticated!');
+            } else {
+                toast.error('Not authenticated!');
+            }
+
         } catch (error) {
-            handleError(error)
-            toast.error('Not authenticated!')
+            console.error('An error occurred: ', error);
         }
     }
 

@@ -5,19 +5,26 @@ const User = require("../user");
 const bcrypt = require("bcryptjs");
 
 // router: GET '/auth/is-authenticated'
+// description: checks if the user is authenticated
 router.get('/is-authenticated', (req, res) => {
-    console.log('[CHECK AUTH] req.isAuthenticated:', req.isAuthenticated(), ' / ', req.user);
-
-    if (!req.isAuthenticated()) {
-        return res.status(401).json({ error: 'User is not authenticated.' });
-    } else {
-        return res.json({ message: 'User is authenticated!' });
-    }
+    console.log('[CHECK AUTH]', req.isAuthenticated(), ' / ', req.user);
+    const isAuthenticated = req.isAuthenticated();
+    return res.json(isAuthenticated);
 });
+
+// router.get('/is-authenticated', (req, res) => {
+//     console.log('[CHECK AUTH]', req.isAuthenticated(), ' / ', req.user);
+//
+//     if (!req.isAuthenticated()) {
+//         return res.status(401).json({ error: 'User is not authenticated.' });
+//     } else {
+//         return res.json({ message: 'User is authenticated!' });
+//     }
+// });
 
 // router: GET '/auth/current-user'
 router.get('/current-user', (req, res) => {
-    console.log('[CURRENT USER] req.isAuthenticated:', req.isAuthenticated(), ' / ', req.user);
+    console.log('[CURRENT USER]', req.isAuthenticated(), ' / ', req.user);
     res.send(req.user);
     // once authenticated, the user is stored in req.user!!!!!
     // the req object you get from the client now has a user object inside of it
@@ -28,7 +35,7 @@ router.get('/current-user', (req, res) => {
 // router: POST '/auth/login'
 router.post('/login',
     passport.authenticate("local"), (req, res) => {
-        console.log('User authenticated:', req.user);
+        console.log('Logged in user:', req.user);
         res.send('Successfully logged in!');
     });
 

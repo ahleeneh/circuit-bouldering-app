@@ -22,11 +22,17 @@ function NavigationWrapper() {
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
-            setAuthenticated(true);
-            console.log('authenticated set to true: ', authenticated);
+
+            if (response.data === true) {
+                setAuthenticated(true);
+                console.log('authenticated set to true: ', authenticated);
+            } else {
+                setAuthenticated(false);
+                console.log('authenticated set to false: ', authenticated);
+            }
+
         } catch (error) {
-            setAuthenticated(false);
-            console.log('authenticated set to false: ', authenticated);
+            console.error('An error occurred: ', error);
         }
     };
 

@@ -15,13 +15,18 @@ function UserDashboardPage() {
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
-            setAuthenticated(true);
-            console.log(response);
+
+            if (response.data === true) {
+                setAuthenticated(true);
+                console.log(response);
+            } else {
+                toast.warning('Sorry, you must be logged in to have access to this feature.', {
+                    icon: '⚠️'
+                });
+                navigate('/');
+            }
         } catch (error) {
-            toast.warning('Sorry, you must be logged in to have access to this feature.', {
-                icon: '⚠️'
-            });
-            navigate('/');
+            console.error('An error occurred: ', error);
         }
     }
 
