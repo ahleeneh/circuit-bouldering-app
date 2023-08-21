@@ -42,10 +42,12 @@ require('./passport')(passport);
 // import route handlers
 const indexRouter = require('./routes/indexRouter');
 const authRouter = require('./routes/authRouter');
+const sessionRouter = require('./routes/sessionRouter');
 
 // mount route handlers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/session', sessionRouter);
 
 /**
  * ---------- SERVER ----------

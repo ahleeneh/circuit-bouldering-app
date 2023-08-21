@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import SessionView from '../components/SessionView';
 
 function UserDashboardPage() {
     const navigate = useNavigate();
@@ -51,7 +52,11 @@ function UserDashboardPage() {
                         <p>
                             <button className="button" onClick={getUser}>Check Authentication</button>
                         </p>
+
+                        {/*<SessionView />*/}
                     </div>
+
+
 
                 </div>
             </div>

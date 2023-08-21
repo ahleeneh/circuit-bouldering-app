@@ -43,11 +43,15 @@ router.post('/register', async (req, res) => {
             res.status(400).send('Registration Failed - email or username taken.');
         } else {
             const hashedPassword = await bcrypt.hash(password, 10);
+
+            // create a new user using the User mmodel
             const newUser = new User({
                 email: email,
                 username: username,
                 password: hashedPassword
             });
+
+            // save the session to the database
             await newUser.save();
             res.send('User Created!');
         }
