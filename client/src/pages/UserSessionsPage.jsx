@@ -4,9 +4,7 @@ import axios from 'axios';
 function UserSessionsPage() {
     const [sessions, setSessions] = useState([]);
 
-    useEffect(() => {
-        fetchUserSessions();
-    }, []);
+
 
     const fetchUserSessions = async () => {
         try {
@@ -20,6 +18,10 @@ function UserSessionsPage() {
             console.error('Error fetching user sessions: ', error);
         }
     }
+
+    useEffect(() => {
+        fetchUserSessions();
+    }, []);
 
     return (
         <div className="App-main">

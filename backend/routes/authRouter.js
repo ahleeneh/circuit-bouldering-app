@@ -5,82 +5,77 @@ const User = require("../user");
 const bcrypt = require("bcryptjs");
 
 // router: GET '/auth/is-authenticated'
-// description: checks if the user is authenticated
+// Description: Returns a boolean symbolizing if the user is authenticated
 router.get('/is-authenticated', (req, res) => {
-    console.log('[CHECK AUTH]', req.isAuthenticated(), ' / ', req.user);
+    console.log('[Is-Authenticated]: ', req.isAuthenticated(), ' / [user]: ', req.user);
     const isAuthenticated = req.isAuthenticated();
-    return res.json(isAuthenticated);
+    res.json(isAuthenticated);
 });
 
-// router.get('/is-authenticated', (req, res) => {
-//     console.log('[CHECK AUTH]', req.isAuthenticated(), ' / ', req.user);
-//
-//     if (!req.isAuthenticated()) {
-//         return res.status(401).json({ error: 'User is not authenticated.' });
-//     } else {
-//         return res.json({ message: 'User is authenticated!' });
-//     }
-// });
 
 // router: GET '/auth/current-user'
+// Description: Returns the user information (once authenticated, the user is stored in req.user)
 router.get('/current-user', (req, res) => {
-    console.log('[CURRENT USER]', req.isAuthenticated(), ' / ', req.user);
+    console.log('[Current-User]', req.isAuthenticated(), ' / [user]: ', req.user);
     res.send(req.user);
-    // once authenticated, the user is stored in req.user!!!!!
-    // the req object you get from the client now has a user object inside of it
-    // and contains all the session data
-    // this can be used and called at absolutely any time, anywhere in the application
 })
 
 // router: POST '/auth/login'
+// Description: Logs in a user
 router.post('/login',
     passport.authenticate("local"), (req, res) => {
-        console.log('Logged in user:', req.user);
+        console.log('[Login]: ', req.user);
         res.send('Successfully logged in!');
     });
 
 // router: POST '/auth/register'
+// Description: Registers a new user
 router.post('/register', async (req, res) => {
-    console.log(req.body);
-    const { email, username, password } = req.body;
+    console.log('[Register]: ', req.body);
+    const {email, username, password} = req.body;
 
     try {
-        const existingUser = await User.findOne({ $or: [{ email: email }, { username: username }] });
+        const existingUser = await User.findOne({$or: [{email: email}, {username: username}]});
+
         if (existingUser) {
-            res.status(400).send('Registration Failed - email or username taken.');
-        } else {
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            // create a new user using the User model
-            const newUser = new User({
-                email: email,
-                username: username,
-                password: hashedPassword
-            });
-
-            // save the session to the database
-            await newUser.save();
-            res.send('User Created!');
+            return res.status(400).send('Registration Failed - email or username taken.');
         }
+
+        // Hash the password using bcrypt
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new user using the User model
+        const newUser = new User({
+            email: email,
+            username: username,
+            password: hashedPassword
+        });
+
+        // Save the session to the database
+        await newUser.save();
+        res.send('User Created!');
+
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
     }
 })
 
 // router: POST '/auth/logout'
+// Description: Logs out a user
 router.post('/logout', function (req, res, next) {
     if (!req.isAuthenticated()) {
         return res.status(401).send('No user is logged in.');
     }
-    console.log('about to log out user')
-    req.logout(function (err) {
-        if (err) {
-            console.error('Error during logout: ', err);
-            return next(err);
+
+    req.logout(function (error) {
+        if (error) {
+            console.error('Error during logout: ', error);
+            return next(error);
         }
+
         console.log('user has been logged out: ', req.isAuthenticated());
-        res.send('Logged out successfully!');
+        res.status(200).send('Logged out successfully!');
     });
 });
 

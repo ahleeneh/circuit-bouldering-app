@@ -9,19 +9,14 @@ function NavigationAuthenticated() {
 
     const logout = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/auth/logout', null, {
+            await axios.post('http://localhost:8000/auth/logout', null, {
                 withCredentials: true
             });
-            console.log(response);
-            toast.info('Goodbye!', {
-                icon: '👋'
-            });
+            toast.info('Goodbye!', {icon: '👋'});
             navigate('/');
         } catch (error) {
             console.error('An error occurred: ', error);
-            toast.info('No one is logged in!', {
-                icon: '🧐'
-            });
+            toast.info('No one is logged in!', {icon: '🧐'});
         }
     }
 

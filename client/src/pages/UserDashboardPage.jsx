@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import SessionView from '../components/SessionView';
 import SessionAdd from '../components/SessionAdd';
 
 function UserDashboardPage() {
@@ -18,11 +17,8 @@ function UserDashboardPage() {
 
             if (response.data === true) {
                 setAuthenticated(true);
-                console.log(response);
             } else {
-                toast.warning('Sorry, you must be logged in to have access to this feature.', {
-                    icon: '⚠️'
-                });
+                toast.warning('Sorry, you must be logged in to have access to this feature.', {icon: '⚠️'});
                 navigate('/');
             }
         } catch (error) {
@@ -59,11 +55,8 @@ function UserDashboardPage() {
                             <button className="button" onClick={getUser}>Check Authentication</button>
                         </p>
 
-                        {/*<SessionView />*/}
                         <SessionAdd />
                     </div>
-
-
 
                 </div>
             </div>

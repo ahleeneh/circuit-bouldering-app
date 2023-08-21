@@ -12,19 +12,14 @@ function HomePage() {
 
     const login = async (data) => {
         try {
-            const response = await axios.post('http://localhost:8000/auth/login', data, {
+            await axios.post('http://localhost:8000/auth/login', data, {
                 withCredentials: true
             });
-            console.log(response);
-            toast.success(`Welcome back, ${data.username}!`, {
-                icon: '👋'
-            });
+            toast.success(`Welcome back, ${data.username}!`, {icon: '👋'});
             navigate('/dashboard');
         } catch (error) {
             console.error('An error occurred: ', error);
-            toast.error('Sorry, the provided username or password is incorrect.', {
-                icon: '🚫'
-            });
+            toast.error('Sorry, the provided username or password is incorrect.', {icon: '🚫'});
         }
     }
 

@@ -9,33 +9,22 @@ function NavigationWrapper() {
     const [authenticated, setAuthenticated] = useState(false);
     const location = useLocation();
 
-    useEffect(() => {
-        checkAuthStatus();
-        console.log('authenticated set to...: ', authenticated);
-        // eslint-disable-next-line
-    }, [location.pathname]);
-
-    const checkAuthStatus = async () => {
+    const getAuthStatus = async () => {
         try {
-            console.log('about to try to get auth...');
-            // eslint-disable-next-line
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
             });
-
-            if (response.data === true) {
-                setAuthenticated(true);
-                console.log('authenticated set to true: ', authenticated);
-            } else {
-                setAuthenticated(false);
-                console.log('authenticated set to false: ', authenticated);
-            }
-
+            setAuthenticated(response.data);
+            console.log('[Navigation Wrapper] setAuthenticated: ', authenticated);
         } catch (error) {
             console.error('An error occurred: ', error);
         }
     };
 
+    useEffect(() => {
+        getAuthStatus();
+        // eslint-disable-next-line
+    }, [location.pathname]);
 
     return (
         <>

@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
-
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SessionAdd() {
-    const {register, handleSubmit, formState: {errors}} = useForm();
     const [user, setUser] = useState('');
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
     const getUser = async () => {
         try {
@@ -24,9 +23,6 @@ function SessionAdd() {
         getUser();
     }, []);
 
-    useEffect(() => {
-        console.log('2) user: ', user);
-    }, [user]);
 
     const addSession = async (data) => {
         try {
@@ -34,7 +30,6 @@ function SessionAdd() {
                 ...data,
                 user: user._id
             }
-            console.log('about to submit data: ', sessionData);
             const response = await axios.post('http://localhost:8000/session', sessionData, {
                 withCredentials: true
             });

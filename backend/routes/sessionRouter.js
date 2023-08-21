@@ -3,6 +3,7 @@ const router = express.Router();
 const Session = require('../session');
 
 // router: GET '/session'
+// Description:
 router.get('/', async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
