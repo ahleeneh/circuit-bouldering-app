@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         }
 
         // fetch sessions associated with the authenticated user
-        const userSessions = await Session.find({user: req.user._id}).sort({date: 1});
+        const userSessions = await Session.find({user: req.user._id}).sort({date: -1});
         console.log('userSessions: ', userSessions);
         res.json(userSessions);
 

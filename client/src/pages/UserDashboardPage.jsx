@@ -5,6 +5,8 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SessionAddForm from '../components/SessionAddForm';
 
+
+
 function UserDashboardPage() {
     const navigate = useNavigate();
     const [authenticated, setAuthenticated] = useState(null);
@@ -62,12 +64,13 @@ function UserDashboardPage() {
                 <div className="page">
 
                     <h2>User Dashboard</h2>
-                    <p>
-                        <button className="button" onClick={getUser}>Check Authentication</button>
-                    </p>
 
                     <h2>Add Session</h2>
                     <SessionAddForm />
+
+                    <p>
+                        <button className="button" onClick={getUser}>Check Authentication</button>
+                    </p>
 
                 </div>
             </div>
