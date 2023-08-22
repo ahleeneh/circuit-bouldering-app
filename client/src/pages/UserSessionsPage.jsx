@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import axios from 'axios';
 import SessionTable from "../components/SessionTable";
+import SessionCardContainer from '../components/SessionCardContainer';
 
 function UserSessionsPage() {
     const navigate = useNavigate();
@@ -45,6 +46,10 @@ function UserSessionsPage() {
 
                     <h2>User Sessions</h2>
                     <SessionTable sessions={sessions}/>
+
+                    <br/>
+
+                    <SessionCardContainer sessions={sessions}/>
 
                 </div>
             </div>

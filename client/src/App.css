@@ -2,10 +2,12 @@
     --color-darkest-grey: #181818;
     --color-dark-grey: #282828;
     --color-medium-grey: #424242;
-    --color-light-grey: #a9a9a9;
+    --color-light-grey: #ecf1f3;
     --color-lightest-grey: #f1f1f1;
     --color-white: #fff;
     --color-transparent: rgba(255, 255, 255, 0);
+
+    --color-card: #f1f1f1;
 
     --color-orange: #d26f3a;
     --color-orange-hover: #c04b0c;
@@ -269,4 +271,51 @@ hr {
 
 .Toastify__toast-icon {
     padding-bottom: 5px;
+}
+
+/*
+    TABLES
+*/
+table {
+    width: 100%;
+    border: 1px solid var(--color-medium-grey);
+    box-sizing: border-box;
+    text-align: left;
+    padding: 1rem;
+}
+
+.session-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.session-card {
+    padding: 1rem;
+    /*width: 15rem;*/
+    background-color: var(--color-card);
+    border-radius: 1.4rem;
+    box-sizing: border-box;
+}
+
+.session-card p {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.session-date {
+    font-weight: bold;
+    margin: 0;
+}
+
+.session-red {
+    margin: 0;
+    color: #ff0000;
+}
+
+
+.recharts-wrapper {
+    margin: 0 auto;
+    box-sizing: border-box;
 }

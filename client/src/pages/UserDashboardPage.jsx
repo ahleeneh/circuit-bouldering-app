@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SessionAdd from '../components/SessionAdd';
+import SessionAddForm from '../components/SessionAddForm';
 
 function UserDashboardPage() {
     const navigate = useNavigate();
@@ -65,7 +65,9 @@ function UserDashboardPage() {
                     <p>
                         <button className="button" onClick={getUser}>Check Authentication</button>
                     </p>
-                    <SessionAdd />
+
+                    <h2>Add Session</h2>
+                    <SessionAddForm />
 
                 </div>
             </div>
