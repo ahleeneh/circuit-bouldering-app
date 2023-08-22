@@ -23,7 +23,6 @@ function SessionAddForm() {
         getUser();
     }, []);
 
-
     const addSession = async (data) => {
         try {
             const sessionData = {

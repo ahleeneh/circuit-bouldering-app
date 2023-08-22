@@ -5,8 +5,6 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SessionAddForm from '../components/SessionAddForm';
 
-
-
 function UserDashboardPage() {
     const navigate = useNavigate();
     const [authenticated, setAuthenticated] = useState(null);
@@ -27,20 +25,6 @@ function UserDashboardPage() {
             console.error('An error occurred: ', error);
         }
     }
-
-    const getUser = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
-                withCredentials: true
-            });
-            console.log(response);
-            toast.success('Authenticated!');
-        } catch (error) {
-            console.error('An error occurred: ', error);
-            toast.error('Not authenticated!')
-        }
-    }
-
 
     useEffect(() => {
         getAuthStatus();
@@ -67,10 +51,6 @@ function UserDashboardPage() {
 
                     <h2>Add Session</h2>
                     <SessionAddForm />
-
-                    <p>
-                        <button className="button" onClick={getUser}>Check Authentication</button>
-                    </p>
 
                 </div>
             </div>

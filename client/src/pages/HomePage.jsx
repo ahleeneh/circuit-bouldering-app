@@ -21,37 +21,13 @@ function HomePage() {
         }
     }
 
-    const getUser = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
-                withCredentials: true
-            });
-
-            if (response.data === true) {
-                toast.success('Authenticated!');
-            } else {
-                toast.error('Not authenticated!');
-            }
-
-        } catch (error) {
-            console.error('An error occurred: ', error);
-        }
-    }
-
     return (
-
         <div className="App-main">
             <div className="content">
                 <div className="page">
 
                     <h2>Login</h2>
                     <LoginForm onSubmit={login}/>
-
-                    <br/>
-
-                    <h2>
-                        <button className="button" onClick={getUser}>Check Authentication</button>
-                    </h2>
 
                 </div>
             </div>

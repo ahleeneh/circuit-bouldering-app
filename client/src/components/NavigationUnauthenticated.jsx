@@ -12,10 +12,10 @@ function NavigationUnauthenticated() {
                         <NavLink to="/">Login</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/about">About</NavLink>
+                        <NavLink to="/register">Register</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/register">Register</NavLink>
+                        <NavLink to="/about">About</NavLink>
                     </li>
                 </ul>
             </nav>

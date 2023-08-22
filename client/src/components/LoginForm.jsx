@@ -2,7 +2,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Link} from "react-router-dom";
 
-function LoginForm({ onSubmit }) {
+function LoginForm({onSubmit}) {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     return (
@@ -31,9 +31,7 @@ function LoginForm({ onSubmit }) {
 
             <hr/>
 
-            <Link to="/register">
-                <button className="button button-register-home">Register</button>
-            </Link>
+            <p style={{textAlign: "center", margin: "0"}}>Don't have an account? <Link to="/register">Sign up</Link></p>
 
         </form>
     );

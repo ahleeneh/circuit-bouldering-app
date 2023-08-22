@@ -32,7 +32,7 @@ function RegisterPage() {
                 <div className="page register-page">
 
                     <h2>Register</h2>
-                    <p>Sign up to record sessions and see sessions from your friends.</p>
+                    <p>Sign up to record your sessions and track your progress.</p>
                     <RegisterForm onSubmit={onSubmit} />
 
                 </div>

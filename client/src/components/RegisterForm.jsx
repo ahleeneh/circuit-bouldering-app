@@ -11,7 +11,13 @@ function RegisterForm({ onSubmit }) {
                 <input
                     type="text"
                     name="email"
-                    {...register('email', {required: 'Email is required.'})}
+                    {...register('email', {
+                        required: 'Email is required.',
+                        pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: 'Invalid email format.',
+                        },
+                    })}
                 />
                 <p>{errors.email?.message}</p>
             </label>
@@ -30,7 +36,13 @@ function RegisterForm({ onSubmit }) {
                 <input
                     type="password"
                     name="password"
-                    {...register('password', {required: 'Password is required.'})}
+                    {...register('password', {
+                        required: 'Password is required.',
+                        minLength: {
+                            value: 6,
+                            message: 'Password must be at least 6 characters.',
+                        },
+                    })}
                     autoComplete="current-password"
                 />
                 <p>{errors.password?.message}</p>

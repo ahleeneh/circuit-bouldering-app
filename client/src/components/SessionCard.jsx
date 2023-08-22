@@ -1,7 +1,7 @@
 import React from 'react';
 import {PieChart, Pie, Cell, Tooltip} from 'recharts';
 
-const COLORS = ['#f5db1f', '#d31d27', '#3cb42c', '#6842dc', '#ea8012', '#333232', '#1872e3', '#e3118b', '#fff'];
+const COLORS = ['#f5db1f', '#d31d27', '#3cb42c', '#8a3cd3', '#ea8012', '#333232', '#1872e3', '#e3118b', '#fff'];
 
 function SessionCard({session}) {
     const data = [
@@ -15,7 +15,6 @@ function SessionCard({session}) {
         {name: 'Pink', value: session.pink},
         {name: 'White', value: session.white},
     ];
-
 
     return (
         <div className="session-card">
