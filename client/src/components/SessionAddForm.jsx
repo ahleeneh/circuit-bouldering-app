@@ -7,37 +7,33 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 
 function SessionAddForm() {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const [user, setUser] = useState('');
     const [expandedBeginner, setExpandedBeginner] = useState(true);
     const [expandedIntermediate, setExpandedIntermediate] = useState(true);
     const [expandedAdvanced, setExpandedAdvanced] = useState(true);
-    const [user, setUser] = useState('');
-    const [sessionData, setSessionData] = useState({
-        yellow: 0,
-        red: 0,
-        green: 0,
-        purple: 0,
-        orange: 0,
-        black: 0,
-        blue: 0,
-        pink: 0,
-        white: 0
+    const {register, handleSubmit, formState: {errors}, setValue, watch} = useForm({
+        defaultValues: {
+            date: new Date().toISOString().split('T')[0],
+            yellow: 0,
+            red: 0,
+            green: 0,
+            purple: 0,
+            orange: 0,
+            black: 0,
+            blue: 0,
+            pink: 0,
+            white: 0
+        }
     });
 
-
     const incrementCount = (color) => {
-        setSessionData((prevData) => ({
-            ...prevData,
-            [color]: prevData[color] + 1
-        }));
-    };
+        setValue(color, watch(color) + 1);
+    }
 
     const decrementCount = (color) => {
-        if (sessionData[color] > 0) {
-            setSessionData((prevData) => ({
-                ...prevData,
-                [color]: prevData[color] - 1
-            }));
+        const currentValue = watch(color);
+        if (currentValue > 0) {
+            setValue(color, currentValue - 1);
         }
     };
 
@@ -58,12 +54,11 @@ function SessionAddForm() {
 
     const addSession = async (data) => {
         try {
-            const sessionDataWithUser = {
-                ...sessionData,
-                date: data.date,
+            const sessionData = {
+                ...data,
                 user: user._id
             }
-            const response = await axios.post('http://localhost:8000/session', sessionDataWithUser, {
+            const response = await axios.post('http://localhost:8000/session', sessionData, {
                 withCredentials: true
             });
             console.log(response);
@@ -80,7 +75,6 @@ function SessionAddForm() {
             <input
                 type="date"
                 name="date"
-                defaultValue={new Date().toISOString().split('T')[0]}
                 {...register('date', {required: 'Date is required.'})}
             />
             <p>{errors.date?.message}</p>
@@ -95,7 +89,7 @@ function SessionAddForm() {
                         <label htmlFor="yellow">Yellow (VB-V0)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('yellow')}>+</button>
-                                <span>{sessionData['yellow']}</span>
+                                <span>{watch('yellow')}</span>
                                 <button type="button" onClick={() => decrementCount('yellow')}>-</button>
                             </div>
                         </label>
@@ -103,7 +97,7 @@ function SessionAddForm() {
                         <label htmlFor="red">Red (V0-V2)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('red')}>+</button>
-                                <span>{sessionData['red']}</span>
+                                <span>{watch('red')}</span>
                                 <button type="button" onClick={() => decrementCount('red')}>-</button>
                             </div>
                         </label>
@@ -111,7 +105,7 @@ function SessionAddForm() {
                         <label htmlFor="green">Green (V1-V3)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('green')}>+</button>
-                                <span>{sessionData['green']}</span>
+                                <span>{watch('green')}</span>
                                 <button type="button" onClick={() => decrementCount('green')}>-</button>
                             </div>
                         </label>
@@ -129,7 +123,7 @@ function SessionAddForm() {
                         <label htmlFor="purple">Purple (V2-V4)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('purple')}>+</button>
-                                <span>{sessionData['purple']}</span>
+                                <span>{watch('purple')}</span>
                                 <button type="button" onClick={() => decrementCount('purple')}>-</button>
                             </div>
                         </label>
@@ -137,7 +131,7 @@ function SessionAddForm() {
                         <label htmlFor="orange">Orange (V3-V5)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('orange')}>+</button>
-                                <span>{sessionData['orange']}</span>
+                                <span>{watch('orange')}</span>
                                 <button type="button" onClick={() => decrementCount('orange')}>-</button>
                             </div>
                         </label>
@@ -145,7 +139,7 @@ function SessionAddForm() {
                         <label htmlFor="black">Black (V4-V6)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('black')}>+</button>
-                                <span>{sessionData['black']}</span>
+                                <span>{watch('black')}</span>
                                 <button type="button" onClick={() => decrementCount('black')}>-</button>
                             </div>
                         </label>
@@ -163,7 +157,7 @@ function SessionAddForm() {
                         <label htmlFor="blue">Blue (V5-V7)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('blue')}>+</button>
-                                <span>{sessionData['blue']}</span>
+                                <span>{watch('blue')}</span>
                                 <button type="button" onClick={() => decrementCount('blue')}>-</button>
                             </div>
                         </label>
@@ -171,7 +165,7 @@ function SessionAddForm() {
                         <label htmlFor="pink">Pink (V6-V8)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('pink')}>+</button>
-                                <span>{sessionData['pink']}</span>
+                                <span>{watch('pink')}</span>
                                 <button type="button" onClick={() => decrementCount('pink')}>-</button>
                             </div>
                         </label>
@@ -179,7 +173,7 @@ function SessionAddForm() {
                         <label htmlFor="white">White (V8+)
                             <div className="climb-buttons">
                                 <button type="button" onClick={() => incrementCount('white')}>+</button>
-                                <span>{sessionData['white']}</span>
+                                <span>{watch('white')}</span>
                                 <button type="button" onClick={() => decrementCount('white')}>-</button>
                             </div>
                         </label>
