@@ -1,13 +1,12 @@
 import React from 'react';
-import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RegisterForm from '../components/RegisterForm';
 
 function RegisterPage() {
     const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors}} = useForm();
 
     const onSubmit = async (data) => {
         try {
@@ -34,41 +33,7 @@ function RegisterPage() {
 
                     <h2>Register</h2>
                     <p>Sign up to record sessions and see sessions from your friends.</p>
-
-                    <form className="form" onSubmit={handleSubmit(onSubmit)}>
-
-                        <label htmlFor="email">Email:
-                            <input
-                                type="text"
-                                name="email"
-                                {...register('email', {required: 'Email is required.'})}
-                            />
-                            <p>{errors.email?.message}</p>
-                        </label>
-
-                        <label htmlFor="username">Username:
-                            <input
-                                type="text"
-                                name="username"
-                                {...register('username', {required: 'Username is required.'})}
-                                autoComplete="username"
-                            />
-                            <p>{errors.username?.message}</p>
-                        </label>
-
-                        <label htmlFor="password">Password:
-                            <input
-                                type="password"
-                                name="password"
-                                {...register('password', {required: 'Password is required.'})}
-                                autoComplete="current-password"
-                            />
-                            <p>{errors.password?.message}</p>
-                        </label>
-
-                        <button className="button button-register" type="submit">Register</button>
-
-                    </form>
+                    <RegisterForm onSubmit={onSubmit} />
 
                 </div>
             </div>

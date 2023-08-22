@@ -7,9 +7,9 @@ import SessionAdd from '../components/SessionAdd';
 
 function UserDashboardPage() {
     const navigate = useNavigate();
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(null);
 
-    const getUserDashboard = async () => {
+    const getAuthStatus = async () => {
         try {
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
                 withCredentials: true
@@ -39,28 +39,37 @@ function UserDashboardPage() {
         }
     }
 
+
     useEffect(() => {
-        getUserDashboard();
+        getAuthStatus();
         // eslint-disable-next-line
     }, [])
 
-    return (
-        authenticated ? (
+    if (!authenticated) {
+        return (
             <div className="App-main">
                 <div className="content">
-
                     <div className="page">
-                    <h2>User Dashboard</h2>
-                        <p>
-                            <button className="button" onClick={getUser}>Check Authentication</button>
-                        </p>
-
-                        <SessionAdd />
                     </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="App-main">
+            <div className="content">
+                <div className="page">
+
+                    <h2>User Dashboard</h2>
+                    <p>
+                        <button className="button" onClick={getUser}>Check Authentication</button>
+                    </p>
+                    <SessionAdd />
 
                 </div>
             </div>
-        ) : null
+        </div>
     );
 
 }

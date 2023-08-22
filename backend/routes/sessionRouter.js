@@ -7,22 +7,17 @@ const Session = require('../session');
 router.get('/', async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
-            console.log('not authenticated when getting session');
-            return res.status(401).json({ error: 'User is not authenticated.' });
+            return res.status(401).json({error: 'User is not authenticated.'});
         }
 
-        console.log('about to get sessions associated w/ authenticated user: ', req.user);
-        console.log('req.user._id: ', req.user._id);
-
         // fetch sessions associated with the authenticated user
-        const userSessions = await Session.find({ user: req.user._id });
-
+        const userSessions = await Session.find({user: req.user._id}).sort({date: 1});
         console.log('userSessions: ', userSessions);
         res.json(userSessions);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Error fetching user sessions.' });
+        res.status(500).json({error: 'Error fetching user sessions.'});
     }
 });
 
@@ -30,13 +25,12 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
-            return res.status(401).json({ error: 'User is not authenticated.' });
+            return res.status(401).json({error: 'User is not authenticated.'});
         }
 
         console.log('about to create a new session!');
-        const { date, red } = req.body;
+        const {date, red} = req.body;
         const user = req.user._id;
-        console.log('user: ', user, ' / date: ', date, ' / red: ', red);
 
         // create a new session using the Session model
         const newSession = new Session({
@@ -48,11 +42,11 @@ router.post('/', async (req, res) => {
 
         // save the session to the database
         await newSession.save();
-        res.status(201).json({ message: 'Session logged successfully!' });
+        res.status(201).json({message: 'Session logged successfully!'});
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Error logging session.' });
+        res.status(500).json({error: 'Error logging session.'});
     }
 })
 

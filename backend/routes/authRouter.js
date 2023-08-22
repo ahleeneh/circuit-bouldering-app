@@ -12,6 +12,14 @@ router.get('/is-authenticated', (req, res) => {
     res.json(isAuthenticated);
 });
 
+// router: GET '/auth/require-auth'
+// Description: Returns an error if the user is not authenticated
+router.get('/require-auth', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.status(401).json({ error: 'User is not authenticated.' });
+    }
+    res.status(200).json({ message: 'User is authenticated.' });
+})
 
 // router: GET '/auth/current-user'
 // Description: Returns the user information (once authenticated, the user is stored in req.user)

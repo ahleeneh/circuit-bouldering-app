@@ -1,14 +1,12 @@
 import React from 'react';
-import {useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
 import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoginForm from '../components/LoginForm';
 
 function HomePage() {
     const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors}} = useForm();
 
     const login = async (data) => {
         try {
@@ -47,34 +45,7 @@ function HomePage() {
                 <div className="page">
 
                     <h2>Login</h2>
-
-                    <form className="form" onSubmit={handleSubmit(login)}>
-                        <label htmlFor="username">Username:
-                            <input
-                                type="text"
-                                name="username"
-                                {...register("username", {required: 'Username is required.'})}
-                                autoComplete="username"
-                            />
-                            <p>{errors.username?.message}</p>
-                        </label>
-
-                        <label htmlFor="password">Password:
-                            <input
-                                type="password"
-                                name="password"
-                                {...register("password", {required: 'Password is required.'})}
-                                autoComplete="password"
-                            />
-                            <p>{errors.password?.message}</p>
-                        </label>
-
-                        <button className="button button-login" type="submit">Login</button>
-                        <hr/>
-                        <Link to="/register">
-                            <button className="button button-register-home">Register</button>
-                        </Link>
-                    </form>
+                    <LoginForm onSubmit={login}/>
 
                     <br/>
 

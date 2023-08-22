@@ -26,6 +26,7 @@ function NavigationWrapper() {
         // eslint-disable-next-line
     }, [location.pathname]);
 
+
     return (
         <>
             {authenticated ? (
