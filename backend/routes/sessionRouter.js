@@ -28,25 +28,15 @@ router.post('/', async (req, res) => {
             return res.status(401).json({error: 'User is not authenticated.'});
         }
 
-        console.log('about to create a new session!');
-        const {date, yellow, red, green, purple, orange, black, blue, pink, white} = req.body;
+        const {date, ...colors} = req.body;
         const user = req.user._id;
 
         // create a new session using the Session model
         const newSession = new Session({
-            user: user,
-            date: date,
-            yellow: yellow,
-            red: red,
-            green: green,
-            purple: purple,
-            orange: orange,
-            black: black,
-            blue: blue,
-            pink: pink,
-            white: white
+            user,
+            date,
+            ...colors
         });
-        console.log('newSession: ', newSession);
 
         // save the session to the database
         await newSession.save();

@@ -21,6 +21,7 @@
 
     --border-radius-1: 0.3rem;
     --border-radius-2: 0.1rem;
+
 }
 
 /*
@@ -61,7 +62,7 @@
 
 .navigation {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1624px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -73,7 +74,7 @@
 .content {
     flex-grow: 1;
     width: 100%;
-    max-width: 1600px;
+    max-width: 1624px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -294,7 +295,10 @@ input[type=text], input[type=password], input[type=date], input[type=number] {
     border-radius: var(--border-radius-1);
     box-sizing: border-box;
     margin: 0.2rem 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
 }
+
 
 hr {
     border-top: 1px solid var(--color-light-grey);
@@ -305,11 +309,14 @@ hr {
     SESSION ADD
 */
 .session-form {
-    max-width: 350px;
+    max-width: 500px;
     margin: 0 auto;
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid var(--color-light-grey);
+    border-radius: var(--border-radius-1);
+    padding: 2rem;
 }
 
 .difficulty-container {
@@ -327,17 +334,35 @@ hr {
     color: var(--color-white);
     box-sizing: border-box;
     padding: 0.6rem 0.4rem;
+    cursor: pointer;
 }
 
-.difficulty-options {
+.difficulty-options label {
     margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
-.session-form label {
-    margin-top: 1rem;
-    display: block;
+.climb-buttons {
+    display: flex;
+    gap: 0.4rem;
+    border: 1px solid var(--color-light-grey);
+    border-radius: 0.4rem;
+    padding: 0.2rem;
+    align-items: center;
+    background-color: var(--color-lightest-grey);
 }
 
+.climb-buttons svg {
+    color: var(--color-blue);
+}
+
+.climb-buttons svg:hover {
+    color: var(--color-blue-hover);
+    cursor: pointer;
+}
 
 /*
   TOASTIFY
@@ -357,6 +382,7 @@ hr {
 .table-container {
     border-radius: 1rem;
     overflow: hidden;
+    margin-bottom: 2rem;
 }
 
 table {
@@ -376,14 +402,14 @@ thead {
 }
 
 th {
-    padding: 1rem;
+    padding: 1.5rem 2rem;
     box-sizing: border-box;
     font-size: 1.1rem;
     color: var(--color-white);
 }
 
 td {
-    padding: 1rem;
+    padding: 1rem 2rem;
     box-sizing: border-box;
     border-top: 1px solid var(--color-light-grey);
 }

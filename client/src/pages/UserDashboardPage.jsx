@@ -47,9 +47,9 @@ function UserDashboardPage() {
             <div className="content">
                 <div className="page">
 
-                    <h2>User Dashboard</h2>
+                    <h2 style={{textAlign: "left"}}>User Dashboard</h2>
 
-                    <h2>Add Session</h2>
+                    <h3 style={{textAlign: "center"}}>Add Session</h3>
                     <SessionAddForm />
 
                 </div>

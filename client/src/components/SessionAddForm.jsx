@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
 function SessionAddForm() {
-    const [user, setUser] = useState('');
+    const navigate = useNavigate();
     const [expandedBeginner, setExpandedBeginner] = useState(true);
     const [expandedIntermediate, setExpandedIntermediate] = useState(true);
     const [expandedAdvanced, setExpandedAdvanced] = useState(true);
@@ -37,32 +40,13 @@ function SessionAddForm() {
         }
     };
 
-    const getUser = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/auth/current-user', {
-                withCredentials: true
-            });
-            setUser(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getUser();
-    }, []);
-
     const addSession = async (data) => {
         try {
-            const sessionData = {
-                ...data,
-                user: user._id
-            }
-            const response = await axios.post('http://localhost:8000/session', sessionData, {
+            await axios.post('http://localhost:8000/session', data, {
                 withCredentials: true
             });
-            console.log(response);
             toast.success('Yay, the session went through!');
+            navigate('/sessions');
         } catch (error) {
             console.error(error);
             toast.error('Sorry, the session is incorrect. ');
@@ -88,25 +72,25 @@ function SessionAddForm() {
                     <div className="difficulty-options">
                         <label htmlFor="yellow">Yellow (VB-V0)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('yellow')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('yellow')} />
                                 <span>{watch('yellow')}</span>
-                                <button type="button" onClick={() => decrementCount('yellow')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('yellow')} />
                             </div>
                         </label>
 
                         <label htmlFor="red">Red (V0-V2)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('red')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('red')} />
                                 <span>{watch('red')}</span>
-                                <button type="button" onClick={() => decrementCount('red')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('red')} />
                             </div>
                         </label>
 
                         <label htmlFor="green">Green (V1-V3)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('green')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('green')} />
                                 <span>{watch('green')}</span>
-                                <button type="button" onClick={() => decrementCount('green')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('green')} />
                             </div>
                         </label>
                     </div>
@@ -122,25 +106,25 @@ function SessionAddForm() {
                     <div className="difficulty-options">
                         <label htmlFor="purple">Purple (V2-V4)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('purple')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('purple')} />
                                 <span>{watch('purple')}</span>
-                                <button type="button" onClick={() => decrementCount('purple')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('purple')} />
                             </div>
                         </label>
 
                         <label htmlFor="orange">Orange (V3-V5)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('orange')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('orange')} />
                                 <span>{watch('orange')}</span>
-                                <button type="button" onClick={() => decrementCount('orange')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('orange')} />
                             </div>
                         </label>
 
                         <label htmlFor="black">Black (V4-V6)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('black')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('black')} />
                                 <span>{watch('black')}</span>
-                                <button type="button" onClick={() => decrementCount('black')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('black')} />
                             </div>
                         </label>
                     </div>
@@ -156,25 +140,25 @@ function SessionAddForm() {
                     <div className="difficulty-options">
                         <label htmlFor="blue">Blue (V5-V7)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('blue')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('blue')} />
                                 <span>{watch('blue')}</span>
-                                <button type="button" onClick={() => decrementCount('blue')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('blue')} />
                             </div>
                         </label>
 
                         <label htmlFor="pink">Pink (V6-V8)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('pink')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('pink')} />
                                 <span>{watch('pink')}</span>
-                                <button type="button" onClick={() => decrementCount('pink')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('pink')} />
                             </div>
                         </label>
 
                         <label htmlFor="white">White (V8+)
                             <div className="climb-buttons">
-                                <button type="button" onClick={() => incrementCount('white')}>+</button>
+                                <RemoveRoundedIcon onClick={() => decrementCount('white')} />
                                 <span>{watch('white')}</span>
-                                <button type="button" onClick={() => decrementCount('white')}>-</button>
+                                <AddRoundedIcon onClick={() => incrementCount('white')} />
                             </div>
                         </label>
                     </div>
