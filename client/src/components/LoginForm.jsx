@@ -11,7 +11,7 @@ function LoginForm({onSubmit}) {
                 <input
                     type="text"
                     name="username"
-                    {...register("username", {required: 'Username is required.'})}
+                    {...register("username", {required: 'required'})}
                     autoComplete="username"
                 />
                 <p>{errors.username?.message}</p>
@@ -21,7 +21,7 @@ function LoginForm({onSubmit}) {
                 <input
                     type="password"
                     name="password"
-                    {...register("password", {required: 'Password is required.'})}
+                    {...register("password", {required: 'required'})}
                     autoComplete="password"
                 />
                 <p>{errors.password?.message}</p>

@@ -50,6 +50,7 @@
     flex-grow: 1;
 }
 
+
 .App-footer {
     display: flex;
     width: 100%;
@@ -426,7 +427,7 @@ tbody tr:hover {
 .session-card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .session-card {

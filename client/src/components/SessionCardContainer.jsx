@@ -1,11 +1,16 @@
 import React from 'react';
-import SessionCard from './SessionCard';
+import SessionDonutChart from './SessionDonutChart';
+import SessionBarChart from './SessionBarChart';
 
-function SessionCardContainer({ sessions }) {
+function SessionCardContainer({ sessions, selectedView }) {
     return (
         <div className="session-card-container">
             {sessions.map(session => (
-                <SessionCard key={session._id} session={session} />
+                selectedView === 'donut' ? (
+                    <SessionDonutChart key={session._id} session={session} />
+                ) : (
+                    <SessionBarChart key={session._id} session={session} />
+                )
             ))}
         </div>
     );

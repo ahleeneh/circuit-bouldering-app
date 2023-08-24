@@ -12,7 +12,7 @@ function RegisterForm({ onSubmit }) {
                     type="text"
                     name="email"
                     {...register('email', {
-                        required: 'Email is required.',
+                        required: 'required',
                         pattern: {
                             value: /\S+@\S+\.\S+/,
                             message: 'Invalid email format.',
@@ -26,7 +26,7 @@ function RegisterForm({ onSubmit }) {
                 <input
                     type="text"
                     name="username"
-                    {...register('username', {required: 'Username is required.'})}
+                    {...register('username', {required: 'required'})}
                     autoComplete="username"
                 />
                 <p>{errors.username?.message}</p>
@@ -37,7 +37,7 @@ function RegisterForm({ onSubmit }) {
                     type="password"
                     name="password"
                     {...register('password', {
-                        required: 'Password is required.',
+                        required: 'required',
                         minLength: {
                             value: 6,
                             message: 'Password must be at least 6 characters.',
