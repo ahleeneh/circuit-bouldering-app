@@ -19,6 +19,9 @@
     --color-purple: #703d9f;
     --color-purple-hover: #8d5eb9;
 
+    --color-delete: #cc3b28;
+    --color-delete-hover: #fa1a00;
+
     --border-radius-1: 0.3rem;
     --border-radius-2: 0.1rem;
 
@@ -419,6 +422,15 @@ tbody tr:hover {
     background-color: var(--color-card-hover);
 }
 
+.delete-icon {
+    color: var(--color-delete);
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: var(--color-delete-hover);
+}
 
 /*
     SESSION CARD

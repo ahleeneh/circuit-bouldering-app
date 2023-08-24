@@ -75,7 +75,7 @@ function UserSessionsPage() {
                     </div>
 
                     {selectedView === 'table' ? (
-                        <SessionTable sessions={sessions}/>
+                        <SessionTable sessions={sessions} setSessions={setSessions}/>
                     ) : (
                         <SessionCardContainer sessions={sessions} selectedView={selectedView}/>
                     )}
