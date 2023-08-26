@@ -4,10 +4,11 @@ const passport = require("passport");
 const User = require("../user");
 const bcrypt = require("bcryptjs");
 
+// ---------- GET ROUTES ----------
+
 // router: GET '/auth/is-authenticated'
 // Description: Returns a boolean symbolizing if the user is authenticated
 router.get('/is-authenticated', (req, res) => {
-    console.log('[Is-Authenticated]: ', req.isAuthenticated(), ' / [user]: ', req.user);
     const isAuthenticated = req.isAuthenticated();
     res.json(isAuthenticated);
 });
@@ -24,21 +25,21 @@ router.get('/require-auth', (req, res) => {
 // router: GET '/auth/current-user'
 // Description: Returns the user information (once authenticated, the user is stored in req.user)
 router.get('/current-user', (req, res) => {
-    console.log('[Current-User]', req.isAuthenticated(), ' / [user]: ', req.user);
     res.send(req.user);
 })
+
+
+// ---------- POST ROUTES ----------
 
 // router: POST '/auth/login'
 // Description: Logs in a user
 router.post('/login', passport.authenticate("local"), (req, res) => {
-        console.log('[Login]: ', req.user);
-        res.send('Successfully logged in!');
-    });
+    res.send('Successfully logged in!');
+});
 
 // router: POST '/auth/register'
 // Description: Registers a new user
 router.post('/register', async (req, res) => {
-    console.log('[Register]: ', req.body);
     const {email, username, password} = req.body;
 
     try {
@@ -86,25 +87,24 @@ router.post('/logout', function (req, res, next) {
     });
 });
 
-router.put('/change-password', async (req, res) => {
-    console.log('entered!!');
+
+// ---------- PUT ROUTES ----------
+
+// router: PUT /auth/update-password
+// Description: Updates the password of a user
+router.put('/update-password', async (req, res) => {
     const userId = req.user._id;
     const {oldPassword, newPassword} = req.body;
-    console.log('userId: ', userId);
-    console.log('oldpassword: ', oldPassword, ', newPassword', newPassword);
 
     try {
         const user = await User.findById(userId);
-        console.log('1: ', user);
-
         if (!user) {
-            return res.status(404).json({ message: 'User not found.' });
+            return res.status(404).json({message: 'User not found.'});
         }
 
         const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
-
         if (!isPasswordMatch) {
-            return res.status(400).json({ message: 'Old password is invalid.' });
+            return res.status(400).json({message: 'Old password is invalid.'});
         }
 
         user.password = await bcrypt.hash(newPassword, 10);
@@ -113,9 +113,29 @@ router.put('/change-password', async (req, res) => {
     } catch (error) {
         console.error(error);
     }
+});
 
-    });
 
+// ---------- DELETE ROUTES ----------
 
+// router: DELETE /auth/delete-account
+// Description: Deletes a user's account
+router.delete('/delete-account', async (req, res) => {
+    console.log(req.user);
+    const userId = req.user._id;
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({message: 'User not found.'});
+        }
+        console.log('user: ', user);
+        await user.deleteOne();
+        res.json({message: 'Account successfully deleted.' });
+    } catch (error) {
+        console.error(error);
+    }
+
+})
 
 module.exports = router;

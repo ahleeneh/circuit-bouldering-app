@@ -88,12 +88,12 @@ function SessionTable({sessions, setSessions}) {
 
     return (
         <>
-            <p className="back-text" onClick={() => setSelectedSessionId(null)}>Back</p>
             <h2>Update Session</h2>
             <SessionUpdateForm
                 sessionId={selectedSessionId}
                 initialData={sessions.find(session => session._id === selectedSessionId)}
                 onUpdateSuccess={onUpdateSuccess}
+                setSelectedSessionId={setSelectedSessionId}
             />
         </>
     );

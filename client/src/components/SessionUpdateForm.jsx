@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 
-function SessionUpdateForm({sessionId, initialData, onUpdateSuccess}) {
+function SessionUpdateForm({sessionId, initialData, onUpdateSuccess, setSelectedSessionId}) {
     const [expandedBeginner, setExpandedBeginner] = useState(true);
     const [expandedIntermediate, setExpandedIntermediate] = useState(true);
     const [expandedAdvanced, setExpandedAdvanced] = useState(true);
@@ -160,6 +160,7 @@ function SessionUpdateForm({sessionId, initialData, onUpdateSuccess}) {
                 </div>
 
                 <button className="button button-update" type="submit">Update</button>
+                <button className="button button-cancel"  onClick={() => setSelectedSessionId(null)}>Cancel</button>
 
             </form>
         </>

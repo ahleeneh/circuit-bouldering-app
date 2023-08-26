@@ -29,9 +29,7 @@ function SessionDonutChart({session}) {
                     innerRadius={45}
                     outerRadius={65}
                     fill="#8884d8"
-                    paddingAngle={5}
-                    startAngle={180}
-                    endAngle={-180}
+                    paddingAngle={0}
                     stroke="none"
                 >
                     {data.map((entry, index) => (

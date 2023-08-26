@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import axios from "axios";
-import ChangePasswordForm from '../components/ChangePasswordForm';
+import UpdatePasswordForm from '../components/UpdatePasswordForm';
 import DeleteAccountForm from '../components/DeleteAccountForm';
 import {toast} from "react-toastify";
 
@@ -57,16 +57,16 @@ function UserAccountPage() {
             <div className="content">
                 <div className="page">
 
-                    <h2>Manage {username} Account</h2>
+                    <h2>Manage Account</h2>
 
-                    {displayForm === 'changePassword' ? (
-                        <ChangePasswordForm onCancel={handleCancel} username={username}/>
+                    {displayForm === 'updatePassword' ? (
+                        <UpdatePasswordForm onCancel={handleCancel} username={username}/>
                     ) : displayForm === 'deleteAccount' ? (
                         <DeleteAccountForm onCancel={handleCancel}/>
                     ) : (
                         <div className="account-buttons-container">
-                            <button className="button" onClick={() => handleDisplayForm('changePassword')}>
-                                Change Password
+                            <button className="button" onClick={() => handleDisplayForm('updatePassword')}>
+                                Update Password
                             </button>
                             <button className="button" onClick={() => handleDisplayForm('deleteAccount')}>
                                 Delete Account
