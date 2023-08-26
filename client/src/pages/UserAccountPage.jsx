@@ -1,32 +1,35 @@
 import React, {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router';
+import axios from "axios";
 import ChangePasswordForm from '../components/ChangePasswordForm';
 import DeleteAccountForm from '../components/DeleteAccountForm';
-import axios from "axios";
 import {toast} from "react-toastify";
 
 function UserAccountPage() {
+    const navigate = useNavigate();
     const [displayForm, setDisplayForm] = useState(null);
     const [authenticated, setAuthenticated] = useState(null);
+    const [username, setUsername] = useState(null);
 
-    const getAuthStatus = async () => {
+    const getUsername = async() => {
         try {
-            const response = await axios.get('http://localhost:8000/auth/is-authenticated', {
+            const response = await axios.get('http://localhost:8000/auth/current-user', {
                 withCredentials: true
-            });
+            })
+            setUsername(response.data.username);
+            setAuthenticated(true);
 
-            if (response.data === true) {
-                setAuthenticated(true);
-            } else {
-                toast.warning('Sorry, you must be logged in to have access to this feature.', {icon: '⚠️'});
-                navigate('/');
-            }
         } catch (error) {
-            console.error('An error occurred: ', error);
+            setUsername(null);
+            setAuthenticated(false);
+            toast.warning('Sorry, you must be logged in to have access to this feature.', {icon: '⚠️'});
+            navigate('/');
+            console.error(error);
         }
     }
 
     useEffect(() => {
-        getAuthStatus();
+        getUsername();
         // eslint-disable-next-line
     }, [])
 
@@ -38,26 +41,11 @@ function UserAccountPage() {
         setDisplayForm(null);
     }
 
-    if (displayForm === 'changePassword') {
+    if (!authenticated) {
         return (
             <div className="App-main">
                 <div className="content">
                     <div className="page">
-                        <h2>Change Password</h2>
-                        <ChangePasswordForm onCancel={handleCancel}/>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    if (displayForm === 'deleteAccount') {
-        return (
-            <div className="App-main">
-                <div className="content">
-                    <div className="page">
-                        <h2>Delete Account</h2>
-                        <DeleteAccountForm onCancel={handleCancel}/>
                     </div>
                 </div>
             </div>
@@ -68,17 +56,24 @@ function UserAccountPage() {
         <div className="App-main">
             <div className="content">
                 <div className="page">
-                    <h2>Manage Account</h2>
 
-                    <div className="account-buttons-container">
-                        <button className="button" onClick={() => handleDisplayForm('changePassword')}>
-                            Change Password
-                        </button>
-                        <button className="button" onClick={() => handleDisplayForm('deleteAccount')}>
-                            Delete Account
-                        </button>
+                    <h2>Manage {username} Account</h2>
 
-                    </div>
+                    {displayForm === 'changePassword' ? (
+                        <ChangePasswordForm onCancel={handleCancel} username={username}/>
+                    ) : displayForm === 'deleteAccount' ? (
+                        <DeleteAccountForm onCancel={handleCancel}/>
+                    ) : (
+                        <div className="account-buttons-container">
+                            <button className="button" onClick={() => handleDisplayForm('changePassword')}>
+                                Change Password
+                            </button>
+                            <button className="button" onClick={() => handleDisplayForm('deleteAccount')}>
+                                Delete Account
+                            </button>
+                        </div>
+                    )}
+
                 </div>
             </div>
         </div>

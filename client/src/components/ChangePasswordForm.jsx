@@ -4,7 +4,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function ChangePasswordForm({onCancel}) {
+function ChangePasswordForm({onCancel, username}) {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     const onSubmit = async (data) => {
@@ -21,6 +21,18 @@ function ChangePasswordForm({onCancel}) {
 
     return (
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="username">
+                <input
+                    name="username"
+                    id="username"
+                    type="hidden"
+                    className="hidden"
+                    value={username}
+                    readOnly
+                    aria-hidden="true"
+                />
+            </label>
+
             <label htmlFor="oldPassword">Old Password:
                 <input
                     type="password"
@@ -48,6 +60,7 @@ function ChangePasswordForm({onCancel}) {
                             message: 'Password must be at least 6 characters.',
                         },
                     })}
+                    autoComplete="current-password"
                 />
                 <p>{errors.newPassword?.message}</p>
             </label>
