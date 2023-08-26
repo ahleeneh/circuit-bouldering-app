@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage';
 import RegisterPage from "./pages/RegisterPage";
 import UserDashboardPage from "./pages/UserDashboardPage";
 import UserSessionsPage from './pages/UserSessionsPage';
+import UserAccountPage from './pages/UserAccountPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -44,6 +45,7 @@ function App() {
                             <Route path='/register' element={<RegisterPage/>}></Route>
                             <Route path='/dashboard' element={<UserDashboardPage/>}></Route>
                             <Route path='/sessions' element={<UserSessionsPage/>}></Route>
+                            <Route path='/account' element={<UserAccountPage/>}></Route>
                             <Route path='*' element={<NotFoundPage />}></Route>
                         </Routes>
                     </main>

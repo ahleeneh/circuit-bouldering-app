@@ -16,9 +16,9 @@ router.get('/is-authenticated', (req, res) => {
 // Description: Returns an error if the user is not authenticated
 router.get('/require-auth', (req, res) => {
     if (!req.isAuthenticated()) {
-        return res.status(401).json({ error: 'User is not authenticated.' });
+        return res.status(401).json({error: 'User is not authenticated.'});
     }
-    res.status(200).json({ message: 'User is authenticated.' });
+    res.status(200).json({message: 'User is authenticated.'});
 })
 
 // router: GET '/auth/current-user'
@@ -30,8 +30,7 @@ router.get('/current-user', (req, res) => {
 
 // router: POST '/auth/login'
 // Description: Logs in a user
-router.post('/login',
-    passport.authenticate("local"), (req, res) => {
+router.post('/login', passport.authenticate("local"), (req, res) => {
         console.log('[Login]: ', req.user);
         res.send('Successfully logged in!');
     });
@@ -86,6 +85,37 @@ router.post('/logout', function (req, res, next) {
         res.status(200).send('Logged out successfully!');
     });
 });
+
+router.put('/change-password', async (req, res) => {
+    console.log('entered!!');
+    const userId = req.user._id;
+    const {oldPassword, newPassword} = req.body;
+    console.log('userId: ', userId);
+    console.log('oldpassword: ', oldPassword, ', newPassword', newPassword);
+
+    try {
+        const user = await User.findById(userId);
+        console.log('1: ', user);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
+
+        if (!isPasswordMatch) {
+            return res.status(400).json({ message: 'Old password is invalid.' });
+        }
+
+        user.password = await bcrypt.hash(newPassword, 10);
+        await user.save();
+        res.json({message: 'Password changed successfully', user});
+    } catch (error) {
+        console.error(error);
+    }
+
+    });
+
 
 
 module.exports = router;

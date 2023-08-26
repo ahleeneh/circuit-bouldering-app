@@ -70,7 +70,6 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    /*align-items: center;*/
     padding: 2rem 4rem;
     box-sizing: border-box;
 }
@@ -258,7 +257,10 @@ a:hover {
     box-sizing: border-box;
 }
 
-
+.button-cancel {
+    width: 100%;
+    font-weight: bold;
+}
 
 /*
   FORMS
@@ -312,7 +314,7 @@ hr {
 /*
     SESSION ADD
 */
-.session-form {
+.session-add-form {
     max-width: 500px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -369,6 +371,61 @@ hr {
 }
 
 /*
+    SESSION UPDATE
+*/
+.session-update-form {
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-orange);
+    border-radius: var(--border-radius-1);
+    padding: 2rem;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group label {
+    min-width: 12rem;
+}
+
+.input-group input[type=number] {
+    margin-right: 2rem;
+    height: 32px;
+}
+
+.button-update {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    font-weight: bold;
+    width: 100%;
+}
+
+.button-update:hover {
+    background-color: var(--color-orange-hover);
+}
+
+.back-text {
+    color: var(--color-medium-grey);
+    cursor: pointer;
+    transition: all 300ms ease;
+    text-decoration: underline;
+}
+
+.back-text p {
+    text-align: left;
+}
+
+.back-text:hover {
+    color: var(--color-dark-grey);
+}
+
+/*
   TOASTIFY
 */
 .Toastify__toast-body {
@@ -385,7 +442,7 @@ hr {
 */
 .table-container {
     border-radius: 1rem;
-    overflow: hidden;
+    overflow-x: auto;
     margin-bottom: 2rem;
 }
 
@@ -396,7 +453,7 @@ table {
     text-align: left;
     border-collapse: collapse;
     margin: 0 auto;
-    padding: 10rem;
+    padding: 4rem;
 }
 
 thead {
@@ -406,14 +463,14 @@ thead {
 }
 
 th {
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 1rem;
     box-sizing: border-box;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--color-white);
 }
 
 td {
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     box-sizing: border-box;
     border-top: 1px solid var(--color-light-grey);
 }
@@ -424,13 +481,24 @@ tbody tr:hover {
 
 .delete-icon {
     color: var(--color-delete);
-    transition: all 300ms ease;
     cursor: pointer;
+    transition: all 300ms ease;
 }
 
 .delete-icon:hover {
     color: var(--color-delete-hover);
 }
+
+.update-icon {
+    color: var(--color-orange);
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.update-icon:hover {
+    color: var(--color-orange-hover);
+}
+
 
 /*
     SESSION CARD
@@ -484,3 +552,79 @@ tbody tr:hover {
     margin-bottom: 2rem;
 }
 
+/*
+    Account
+*/
+.account-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* small devices (landscape phones) */
+@media (max-width: 576px) {
+    .App-header, .App-content, .App-footer {
+        margin: 0;
+        padding: 0;
+    }
+
+    .h1 {
+        margin: 0 auto;
+    }
+
+    .navigation {
+        max-width: 100%;
+        display: block;
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        margin: 0 auto;
+        padding: 0;
+        gap: 1rem;
+    }
+
+    .content {
+        padding: 0;
+        margin: 0 0 2rem 0;
+    }
+
+    .session-wrapper {
+        padding: 1rem;
+        margin: 0;
+    }
+
+    .session-card-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .session-add-form, .session-update-form {
+        border: none;
+    }
+
+    .table-container {
+        margin: 1rem;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+    }
+}
+
+
+/* x-large devices (large desktops)*/
+@media (max-width: 1200px) {
+    th:not(:first-child) {
+        padding: 1.5rem 0.25rem;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+
+    td:not(:first-child) {
+        padding: 1rem 0.25rem;
+    }
+}

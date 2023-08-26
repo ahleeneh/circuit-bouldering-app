@@ -32,6 +32,9 @@ function NavigationAuthenticated() {
                         <NavLink to="/sessions">View Sessions</NavLink>
                     </li>
                     <li>
+                        <NavLink to="/account">Account</NavLink>
+                    </li>
+                    <li>
                         <button className="button button-logout" onClick={logout}>Logout</button>
                     </li>
                 </ul>

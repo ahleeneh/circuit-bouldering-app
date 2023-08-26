@@ -54,7 +54,7 @@ function SessionAddForm() {
     }
 
     return (
-        <form className="session-form" onSubmit={handleSubmit(addSession)}>
+        <form className="session-add-form" onSubmit={handleSubmit(addSession)}>
             <label htmlFor="date">Date</label>
             <input
                 type="date"

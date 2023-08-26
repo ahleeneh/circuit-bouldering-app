@@ -50,6 +50,32 @@ router.post('/', async (req, res) => {
     }
 })
 
+// router: PUT /session/:sessionId
+router.put('/:sessionId', async (req, res) => {
+    try {
+        if (!req.isAuthenticated()) {
+            return res.status(401).json({ error: 'User is not authenticated.' });
+        }
+
+        const sessionId = req.params.sessionId;
+        const updateData = req.body;
+
+        const updatedSession = await Session.findByIdAndUpdate(
+            sessionId,
+            updateData,
+            { new: true }
+        );
+
+        if (!updatedSession) {
+            return res.status(404).json({ error: 'Session not found or you do not have permission.' });
+        }
+        res.status(200).json({ message: 'Session updated successfully!', updatedSession });
+
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating session.' });
+    }
+})
+
 // router: DELETE /session/:sessionId
 router.delete('/:sessionId', async (req, res) => {
     try {
