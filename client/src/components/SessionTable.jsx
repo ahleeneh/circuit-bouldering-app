@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import {toast} from 'react-toastify';
@@ -7,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import SessionUpdateForm from './SessionUpdateForm';
 
 function SessionTable({sessions, setSessions}) {
+    const navigate = useNavigate();
     const [selectedSessionId, setSelectedSessionId] = useState(null);
 
     const onDelete = async (sessionId) => {
@@ -36,6 +38,7 @@ function SessionTable({sessions, setSessions}) {
         setSessions(
             (prevSessions) =>
                 prevSessions.map((session) => session._id === updatedSession._id ? updatedSession : session));
+        navigate('/sessions');
     }
 
     if (!selectedSessionId) {

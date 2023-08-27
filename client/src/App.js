@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import NavigationWrapper from './components/NavigationWrapper';
 import Footer from './components/Footer';
-
 import HomePage from './pages/HomePage';
 import RegisterPage from "./pages/RegisterPage";
 import UserDashboardPage from "./pages/UserDashboardPage";

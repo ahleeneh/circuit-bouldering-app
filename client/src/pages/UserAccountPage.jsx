@@ -8,7 +8,7 @@ import {toast} from "react-toastify";
 function UserAccountPage() {
     const navigate = useNavigate();
     const [displayForm, setDisplayForm] = useState(null);
-    const [authenticated, setAuthenticated] = useState(null);
+    const [authenticated, setAuthenticated] = useState(false);
     const [username, setUsername] = useState(null);
 
     const getUsername = async() => {
@@ -18,13 +18,25 @@ function UserAccountPage() {
             })
             setUsername(response.data.username);
             setAuthenticated(true);
-
         } catch (error) {
             setUsername(null);
             setAuthenticated(false);
             toast.warning('Sorry, you must be logged in to have access to this feature.', {icon: '⚠️'});
             navigate('/');
             console.error(error);
+        }
+    }
+
+    const logout = async () => {
+        try {
+            await axios.post('http://localhost:8000/auth/logout', null, {
+                withCredentials: true
+            });
+            toast.info('Goodbye!', {icon: '👋'});
+            navigate('/');
+        } catch (error) {
+            console.error('An error occurred: ', error);
+            toast.info('No one is logged in!', {icon: '🧐'});
         }
     }
 
@@ -71,6 +83,7 @@ function UserAccountPage() {
                             <button className="button" onClick={() => handleDisplayForm('deleteAccount')}>
                                 Delete Account
                             </button>
+                            <button className="button button-logout" onClick={logout}>Logout</button>
                         </div>
                     )}
 

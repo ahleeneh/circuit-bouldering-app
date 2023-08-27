@@ -18,8 +18,17 @@ function SessionUpdateForm({sessionId, initialData, onUpdateSuccess, setSelected
     });
 
     const onUpdate = async (data) => {
+        data.yellow = data.yellow || 0;
+        data.red = data.red || 0;
+        data.green = data.green || 0;
+        data.purple = data.purple || 0;
+        data.orange = data.orange || 0;
+        data.black = data.black || 0;
+        data.blue = data.blue || 0;
+        data.pink = data.pink || 0;
+        data.white = data.white || 0;
+
         try {
-            console.log('about to do onUpdate axios thing: ', data);
             await axios.put(`http://localhost:8000/session/${sessionId}`, data, {
                 withCredentials: true
             })
@@ -160,7 +169,7 @@ function SessionUpdateForm({sessionId, initialData, onUpdateSuccess, setSelected
                 </div>
 
                 <button className="button button-update" type="submit">Update</button>
-                <button className="button button-cancel"  onClick={() => setSelectedSessionId(null)}>Cancel</button>
+                <button className="button button-cancel" onClick={() => setSelectedSessionId(null)}>Cancel</button>
 
             </form>
         </>

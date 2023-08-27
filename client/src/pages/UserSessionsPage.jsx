@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import axios from 'axios';
 import SessionTable from "../components/SessionTable";
-import SessionCardContainer from '../components/SessionCardContainer';
+import SessionDonutChart from "../components/SessionDonutChart";
+import SessionBarChart from "../components/SessionBarChart";
 import DonutLargeRoundedIcon from '@mui/icons-material/DonutLargeRounded';
 import TableRowsRounded from '@mui/icons-material/TableRowsRounded';
 import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
+import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
 function UserSessionsPage() {
     const navigate = useNavigate();
@@ -28,9 +30,14 @@ function UserSessionsPage() {
         }
     }
 
+    const handleRefresh = () => {
+        getUserSessions();
+    };
+
     useEffect(() => {
         getUserSessions();
     }, []);
+
 
     if (!authenticated) {
         return (
@@ -51,7 +58,14 @@ function UserSessionsPage() {
                     <div className="session-wrapper">
                         <h2>Session History</h2>
 
+
                         <div className="toggle-view-container">
+                            <button
+                                className="button button-view button-refresh"
+                                onClick={() => handleRefresh()}
+                            >
+                                <RefreshRoundedIcon/>
+                            </button>
                             <button
                                 className={`button button-view ${selectedView === 'chart' ? 'selected' : ''}`}
                                 onClick={() => setSelectedView('chart')}
@@ -71,13 +85,14 @@ function UserSessionsPage() {
                                 <TableRowsRounded/>
                             </button>
                         </div>
-
                     </div>
 
                     {selectedView === 'table' ? (
                         <SessionTable sessions={sessions} setSessions={setSessions}/>
+                    ) : selectedView === 'donut' ? (
+                        <SessionDonutChart sessions={sessions}/>
                     ) : (
-                        <SessionCardContainer sessions={sessions} selectedView={selectedView}/>
+                        <SessionBarChart sessions={sessions}/>
                     )}
 
                 </div>

@@ -1,25 +1,7 @@
 import React from 'react';
-import {useNavigate} from 'react-router';
-import axios from "axios";
-import {toast} from "react-toastify";
 import {NavLink} from "react-router-dom";
 
 function NavigationAuthenticated() {
-    const navigate = useNavigate();
-
-    const logout = async () => {
-        try {
-            await axios.post('http://localhost:8000/auth/logout', null, {
-                withCredentials: true
-            });
-            toast.info('Goodbye!', {icon: '👋'});
-            navigate('/');
-        } catch (error) {
-            console.error('An error occurred: ', error);
-            toast.info('No one is logged in!', {icon: '🧐'});
-        }
-    }
-
     return (
         <header className="App-header App-header-user">
             <nav className="navigation">
@@ -32,10 +14,7 @@ function NavigationAuthenticated() {
                         <NavLink to="/sessions">View Sessions</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/account">Account</NavLink>
-                    </li>
-                    <li>
-                        <button className="button button-logout" onClick={logout}>Logout</button>
+                        <NavLink to="/account">Manage Account</NavLink>
                     </li>
                 </ul>
             </nav>
