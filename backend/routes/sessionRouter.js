@@ -3,7 +3,6 @@ const router = express.Router();
 const sessionController = require('../controllers/sessionController');
 
 // router: GET '/session'
-// Description:
 router.get('/', sessionController.getSession);
 
 // router: POST '/session'

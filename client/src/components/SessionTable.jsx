@@ -14,7 +14,6 @@ function SessionTable({sessions, setSessions}) {
     const onDelete = async (sessionId) => {
         try {
             const confirmed = window.confirm('Are you sure you want to delete this session?');
-
             if (confirmed) {
                 await axios.delete(`http://localhost:8000/session/${sessionId}`, {
                     withCredentials: true

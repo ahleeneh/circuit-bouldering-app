@@ -13,7 +13,6 @@ function RegisterPage() {
             const response = await axios.post('http://localhost:8000/auth/register', data, {
                 withCredentials: true
             });
-            console.log(response);
             toast.success('Registration successful! You can now log in.', {
                 icon: '🤝'
             });

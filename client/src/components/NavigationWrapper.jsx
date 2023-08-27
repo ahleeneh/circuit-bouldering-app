@@ -15,7 +15,6 @@ function NavigationWrapper() {
                 withCredentials: true
             });
             setAuthenticated(response.data);
-            console.log('[Navigation Wrapper] setAuthenticated: ', authenticated);
         } catch (error) {
             console.error('An error occurred: ', error);
         }

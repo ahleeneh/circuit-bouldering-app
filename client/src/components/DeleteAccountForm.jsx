@@ -10,13 +10,10 @@ function DeleteAccountForm({onCancel}) {
     const deleteUser = async () => {
         try {
             const confirmed = window.confirm('Are you sure you want to delete this account?');
-
             if (confirmed) {
-                const response = await axios.delete('http://localhost:8000/auth/delete-account', {
+                await axios.delete('http://localhost:8000/auth/delete-account', {
                     withCredentials: true
                 });
-
-                console.log(response);
                 toast.info('Thanks for your time at Circuit! Your account has now been deleted.', {icon: '👋'});
                 navigate('/');
             }

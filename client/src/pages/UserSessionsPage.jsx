@@ -21,7 +21,6 @@ function UserSessionsPage() {
             const response = await axios.get('http://localhost:8000/session', {
                 withCredentials: true
             });
-            console.log(response.data);
             setSessions(response.data);
             setAuthenticated(true);
         } catch (error) {
