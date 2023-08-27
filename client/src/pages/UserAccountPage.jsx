@@ -27,7 +27,7 @@ function UserAccountPage() {
         }
     }
 
-    const logout = async () => {
+    const logoutUser = async () => {
         try {
             await axios.post('http://localhost:8000/auth/logout', null, {
                 withCredentials: true
@@ -83,7 +83,7 @@ function UserAccountPage() {
                             <button className="button" onClick={() => handleDisplayForm('deleteAccount')}>
                                 Delete Account
                             </button>
-                            <button className="button button-logout" onClick={logout}>Logout</button>
+                            <button className="button button-logout" onClick={logoutUser}>Logout</button>
                         </div>
                     )}
 

@@ -168,8 +168,7 @@ function SessionAddForm() {
             <button className="button button-login" type="submit">Add Session</button>
 
         </form>
-
-    )
+    );
 
 }
 

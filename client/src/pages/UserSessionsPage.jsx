@@ -56,7 +56,7 @@ function UserSessionsPage() {
                 <div className="page">
 
                     <div className="session-wrapper">
-                        <h2>Session History</h2>
+                        <h2>View Sessions</h2>
 
 
                         <div className="toggle-view-container">

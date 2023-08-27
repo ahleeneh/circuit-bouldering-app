@@ -8,7 +8,7 @@ import RegisterForm from '../components/RegisterForm';
 function RegisterPage() {
     const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
+    const registerUser = async (data) => {
         try {
             const response = await axios.post('http://localhost:8000/auth/register', data, {
                 withCredentials: true
@@ -33,7 +33,7 @@ function RegisterPage() {
 
                     <h2>Register</h2>
                     <p>Sign up to record your sessions and track your progress.</p>
-                    <RegisterForm onSubmit={onSubmit} />
+                    <RegisterForm onSubmit={registerUser} />
 
                 </div>
             </div>

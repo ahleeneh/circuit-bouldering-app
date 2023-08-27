@@ -8,7 +8,7 @@ import LoginForm from '../components/LoginForm';
 function HomePage() {
     const navigate = useNavigate();
 
-    const login = async (data) => {
+    const loginUser = async (data) => {
         try {
             await axios.post('http://localhost:8000/auth/login', data, {
                 withCredentials: true
@@ -27,7 +27,7 @@ function HomePage() {
                 <div className="page">
 
                     <h2>Login</h2>
-                    <LoginForm onSubmit={login}/>
+                    <LoginForm onSubmit={loginUser}/>
 
                 </div>
             </div>

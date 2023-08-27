@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function DeleteAccountForm({onCancel}) {
     const navigate = useNavigate();
 
-    const onSubmit = async () => {
+    const deleteUser = async () => {
         try {
             const confirmed = window.confirm('Are you sure you want to delete this account?');
 
@@ -17,7 +17,7 @@ function DeleteAccountForm({onCancel}) {
                 });
 
                 console.log(response);
-                toast.success('Account deleted! :(');
+                toast.info('Thanks for your time at Circuit! Your account has now been deleted.', {icon: '👋'});
                 navigate('/');
             }
         } catch (error) {
@@ -30,7 +30,7 @@ function DeleteAccountForm({onCancel}) {
             <p>If you are sure that you want to permanently delete your account, please confirm by clicking the
                 button
                 below.</p>
-            <button className="button button-delete" type="button" onClick={onSubmit}>Delete Account</button>
+            <button className="button button-delete" type="button" onClick={deleteUser}>Delete Account</button>
             <button className="button button-cancel" type="button" onClick={onCancel}>Cancel</button>
         </form>
     )
