@@ -23,7 +23,7 @@ To set up and run the Circuit Bouldering App on your local machine, follow these
 
 ![Screenshot 2023-08-27 at 7 27 50 PM](https://github.com/ahleeneh/circuit-bouldering-app/assets/107948221/46924e8e-cbf3-474c-915c-e40bbb754278)
 
-![Screenshot 2023-08-27 at 7 28 32 PM](https://github.com/ahleeneh/circuit-bouldering-app/assets/107948221/a913c2e2-6b2b-4e17-949c-74d3cc9736c1)
+![Screenshot 2023-08-27 at 7 28 38 PM](https://github.com/ahleeneh/circuit-bouldering-app/assets/107948221/2ec4f661-c067-4539-b86d-2031397a6ce8)
 
 ![Screenshot 2023-08-27 at 7 28 38 PM](https://github.com/ahleeneh/circuit-bouldering-app/assets/107948221/b2345689-3be9-4466-9781-9853ee21699c)
 
