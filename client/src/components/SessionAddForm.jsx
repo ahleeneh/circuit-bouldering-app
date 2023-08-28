@@ -40,6 +40,7 @@ function SessionAddForm() {
         }
     };
 
+    // Function to handle adding a session to a user's session history
     const addSession = async (data) => {
         try {
             await axios.post('http://localhost:8000/session', data, {

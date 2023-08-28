@@ -11,13 +11,13 @@ const { sessionConfig } = require('./database');
  * ---------- SETUP ----------
  */
 
-// gives us access to variables set in the .env file via 'process.env.VARIABLE_NAME' system
+// Load environment variables from .env file via 'process.env.VARIABLE_NAME' system
 require('dotenv').config();
 
-// create the Express application
+// Create the Express application
 const app = express();
 
-// middleware setup
+// Middleware setup
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
@@ -25,11 +25,11 @@ app.use(cors({
     credentials: true
 }))
 
-// session setup
+// Session setup
 app.use(session(sessionConfig));
 app.use(cookieParser(process.env.SESSION_SECRET));
 
-// passport authentication
+// Passport authentication setup
 app.use(passport.initialize());
 app.use(passport.session());
 require('./passport')(passport);
@@ -39,12 +39,12 @@ require('./passport')(passport);
  * ---------- ROUTES ----------
  */
 
-// import route handlers
+// Import route handlers
 const indexRouter = require('./routes/indexRouter');
 const authRouter = require('./routes/authRouter');
 const sessionRouter = require('./routes/sessionRouter');
 
-// mount route handlers
+// Mount route handlers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/session', sessionRouter);

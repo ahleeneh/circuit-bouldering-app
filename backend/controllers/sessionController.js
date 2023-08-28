@@ -1,12 +1,13 @@
 const Session = require('../session');
 
+// Get the sessions associated with the current authenticated user
 exports.getSession = async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
             return res.status(401).json({error: 'User is not authenticated.'});
         }
 
-        // fetch sessions associated with the authenticated user
+        // Fetch sessions associated with the authenticated user
         const userSessions = await Session.find({
             user: req.user._id}).sort({date: -1}
         );
@@ -19,6 +20,7 @@ exports.getSession = async (req, res) => {
     }
 };
 
+// Add a new session
 exports.addSession = async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
@@ -28,14 +30,14 @@ exports.addSession = async (req, res) => {
         const {date, ...colors} = req.body;
         const user = req.user._id;
 
-        // create a new session using the Session model
+        // Create a new session using the Session model
         const newSession = new Session({
             user,
             date,
             ...colors
         });
 
-        // save the session to the database
+        // Save the session to the database
         await newSession.save();
         res.status(201).json({message: 'Session logged successfully!'});
 
@@ -45,6 +47,7 @@ exports.addSession = async (req, res) => {
     }
 };
 
+// Update an existing session
 exports.updateSession = async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
@@ -70,6 +73,7 @@ exports.updateSession = async (req, res) => {
     }
 };
 
+// Delete an existing user's session
 exports.deleteSession = async (req, res) => {
     try {
         if (!req.isAuthenticated()) {

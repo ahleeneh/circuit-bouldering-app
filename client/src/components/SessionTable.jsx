@@ -11,6 +11,7 @@ function SessionTable({sessions, setSessions}) {
     const navigate = useNavigate();
     const [selectedSessionId, setSelectedSessionId] = useState(null);
 
+    // Function to handle deleting a given session
     const onDelete = async (sessionId) => {
         try {
             const confirmed = window.confirm('Are you sure you want to delete this session?');

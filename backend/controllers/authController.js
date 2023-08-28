@@ -1,11 +1,13 @@
 const User = require('../user');
 const bcrypt = require('bcryptjs');
 
+// Check if a user is authenticated and returns a boolean value
 exports.isAuthenticated = (req, res) => {
     const isAuthenticated = req.isAuthenticated();
     res.json(isAuthenticated);
 };
 
+// Get the current user's authenticated user information
 exports.getCurrentUser = (req, res) => {
     if (!req.isAuthenticated()) {
         return res.status(401).json({error: 'User is not authenticated.'});
@@ -13,10 +15,12 @@ exports.getCurrentUser = (req, res) => {
     res.send(req.user);
 };
 
+// Log in a user
 exports.login = async (req, res) => {
     res.send('Successfully logged in!');
 };
 
+// Register a new user
 exports.register = async (req, res) => {
     const {email, username, password} = req.body;
 
@@ -47,6 +51,7 @@ exports.register = async (req, res) => {
     }
 }
 
+// Log out a user
 exports.logout = async (req, res, next) => {
     if (!req.isAuthenticated()) {
         return res.status(401).send('No user is logged in.');
@@ -63,6 +68,7 @@ exports.logout = async (req, res, next) => {
     });
 };
 
+// Update an existing user's password
 exports.updatePassword = async (req, res) => {
     const userId = req.user._id;
     const {oldPassword, newPassword} = req.body;
@@ -86,6 +92,7 @@ exports.updatePassword = async (req, res) => {
     }
 };
 
+// Delete an existing user's account
 exports.deleteAccount = async (req, res) => {
     console.log(req.user);
     const userId = req.user._id;

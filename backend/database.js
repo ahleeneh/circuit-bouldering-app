@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// Create connection string using environment variables
 const conn = `${process.env.START_MONGODB_STRING}://${process.env.DBUSER_MONGODB}:${process.env.PASSWORD_MONGODB}${process.env.END_MONGODB_STRING}`
 
+// Connect to MongoDB using the connection string
 mongoose.connect(conn, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -14,6 +16,7 @@ mongoose.connect(conn, {
         console.log('Bummer! MongoDB connection not working! ', error);
     })
 
+// Configuration for the session middleware
 const sessionConfig = {
     secret: process.env.SESSION_SECRET,
     resave: true,
@@ -25,4 +28,5 @@ const sessionConfig = {
     }
 }
 
+// Export the session configuration object
 module.exports = { sessionConfig };

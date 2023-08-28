@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Define Session schema
 const session = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -48,6 +49,7 @@ const session = new mongoose.Schema({
     }
 })
 
+// Middleware: pre-save hook
 session.pre('save', function (next) {
     if (this.isNew) {
         // Set color fields to 0 if they are null
@@ -66,5 +68,5 @@ session.pre('save', function (next) {
     }
 });
 
-
+// Export the Session model
 module.exports = mongoose.model("Session", session);

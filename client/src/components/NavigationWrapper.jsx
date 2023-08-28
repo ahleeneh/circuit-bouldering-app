@@ -9,6 +9,7 @@ function NavigationWrapper() {
     const [authenticated, setAuthenticated] = useState(false);
     const location = useLocation();
 
+    // Function to retrieve a user's authentication status
     const getAuthStatus = async () => {
         try {
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {

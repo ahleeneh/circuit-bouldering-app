@@ -9,6 +9,7 @@ function UserDashboardPage() {
     const navigate = useNavigate();
     const [authenticated, setAuthenticated] = useState(null);
 
+    // Function to handle retrieving a user's authenticated status
     const getAuthStatus = async () => {
         try {
             const response = await axios.get('http://localhost:8000/auth/is-authenticated', {

@@ -8,6 +8,7 @@ import LoginForm from '../components/LoginForm';
 function HomePage() {
     const navigate = useNavigate();
 
+    // Function to handle user login
     const loginUser = async (data) => {
         try {
             await axios.post('http://localhost:8000/auth/login', data, {

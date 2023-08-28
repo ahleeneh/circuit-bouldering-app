@@ -15,6 +15,7 @@ function UserSessionsPage() {
     const [authenticated, setAuthenticated] = useState(null);
     const [selectedView, setSelectedView] = useState('chart');
 
+    // Function to handle retrieving an authenticated user's sessions
     const getUserSessions = async () => {
         try {
             console.log('about to fetch a session!!!!! frontend side baby');

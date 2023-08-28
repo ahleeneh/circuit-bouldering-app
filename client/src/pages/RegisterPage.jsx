@@ -8,6 +8,7 @@ import RegisterForm from '../components/RegisterForm';
 function RegisterPage() {
     const navigate = useNavigate();
 
+    // Function to handle user registration
     const registerUser = async (data) => {
         try {
             const response = await axios.post('http://localhost:8000/auth/register', data, {

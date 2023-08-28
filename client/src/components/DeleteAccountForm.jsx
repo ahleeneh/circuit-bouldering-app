@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function DeleteAccountForm({onCancel}) {
     const navigate = useNavigate();
 
+    // Function to handle deleting a user's account
     const deleteUser = async () => {
         try {
             const confirmed = window.confirm('Are you sure you want to delete this account?');

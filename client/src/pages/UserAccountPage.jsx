@@ -11,6 +11,7 @@ function UserAccountPage() {
     const [authenticated, setAuthenticated] = useState(false);
     const [username, setUsername] = useState(null);
 
+    // Function to handle retrieving the authenticated user's username
     const getUsername = async() => {
         try {
             const response = await axios.get('http://localhost:8000/auth/current-user', {
@@ -27,6 +28,7 @@ function UserAccountPage() {
         }
     }
 
+    // Function to handle user logout
     const logoutUser = async () => {
         try {
             await axios.post('http://localhost:8000/auth/logout', null, {
