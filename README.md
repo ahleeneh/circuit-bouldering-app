@@ -1,4 +1,4 @@
-# 🧗‍♀️ Circuit Bouldering App
+# 🧗‍♀️ Circuit Bouldering
 This application, created by Aline Murillo, serves as a personal project designed for climbers frequenting Bouldering Project's gyms. The Circuit Boulderign App offers climbers a platform to manage their climbing sessions and track their progress.
 
 ## 📄 Project Overview
